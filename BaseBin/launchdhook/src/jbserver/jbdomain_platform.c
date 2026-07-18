@@ -3,6 +3,7 @@
 
 #include <libjailbreak/codesign.h>
 #include <libjailbreak/libjailbreak.h>
+#include <bsm/libbsm.h>
 
 extern void systemwide_domain_set_enabled(bool enabled);
 

@@ -14,6 +14,7 @@
 #include <libjailbreak/primitives.h>
 #include <libjailbreak/codesign.h>
 #include <libjailbreak/translation.h>
+#include <bsm/libbsm.h>
 
 #include <os/log.h>
 

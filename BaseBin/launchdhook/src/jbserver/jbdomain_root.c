@@ -4,6 +4,7 @@
 #include <libjailbreak/info.h>
 #include <libjailbreak/kernel.h>
 #include <libjailbreak/primitives.h>
+#include <bsm/libbsm.h>
 
 static bool root_domain_allowed(audit_token_t clientToken)
 {

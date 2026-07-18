@@ -17,7 +17,7 @@ ChOma: .build .include
 	@cp -r ChOma/output/ios/include/choma .include
 
 XPF: .build .include ChOma
-	@$(MAKE) -C XPF output/ios/libxpf.dylib CHOMA_PATH=../ChOma CHOMA_DYLIB_PATH="../.build"
+	@$(MAKE) -C XPF output/ios/libxpf.dylib CHOMA_PATH=../ChOma CHOMA_DYLIB_PATH="../.build" EXTRA_CFLAGS="-I../.include"
 	@cp XPF/output/ios/libxpf.dylib .build/libxpf.dylib
 	@mkdir -p .include/xpf
 	@cp XPF/src/xpf.h .include/xpf
@@ -89,6 +89,12 @@ makerw: .build .include libjailbreak
 # If the SDK already ships XPC (it does so in iOS 17.4+), remove the local copy of it
 ifneq (,$(wildcard $(shell xcrun --sdk iphoneos --show-sdk-path)/usr/include/xpc.modulemap))
 	rm -rf .include/xpc
+endif
+# Likewise drop the local bsm audit headers when the SDK provides them, so they do
+# not shadow the SDK's Darwin.bsm.audit module (which breaks Clang-modules tweaks).
+# Keep libbsm.h: it is self-contained and the iOS SDK does not ship it.
+ifneq (,$(wildcard $(shell xcrun --sdk iphoneos --show-sdk-path)/usr/include/bsm/audit.h))
+	rm -f .include/bsm/audit.h .include/bsm/audit_filter.h .include/bsm/audit_session.h .include/bsm/audit_uevents.h
 endif
 
 basebin.tc: subprojects

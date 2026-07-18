@@ -1,0 +1,100 @@
+name: Build Dopamine (.tipa for TrollStore)
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths-ignore:
+      - '**.md'
+      - '.gitignore'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    # macos-14 (Sonoma) ships Xcode 15.x. The Dopamine app target is known to
+    # build only on Xcode 14–15 (see README); newer Xcode/SDKs on macos-15 are
+    # untested and the app's xcodebuild step is the one most likely to break.
+    runs-on: macos-14
+    env:
+      THEOS: ${{ github.workspace }}/theos
+    steps:
+      - name: Select Xcode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          # Pin to a 15.x whose iOS SDK (17.2, no xpc.modulemap yet) exercises the
+          # same header code paths validated locally with Xcode 15.0.1 / iOS 17.0.
+          # 15.0.1 .. 15.4 all work with the fixes in this repo; do NOT use 16.x.
+          xcode-version: '15.2'
+
+      - name: Checkout (with submodules)
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: Install Procursus toolchain
+        uses: dhinakg/procursus-action@main
+        with:
+          packages: ldid dpkg findutils sed coreutils make
+
+      - name: Install Homebrew deps + GNU make
+        run: |
+          set -eux
+          brew install make libarchive openssl@3
+          echo "$(brew --prefix make)/libexec/gnubin" >> "$GITHUB_PATH"
+
+      - name: Install Theos + iOS SDKs
+        run: |
+          set -euxo pipefail
+          git clone --quiet --recursive https://github.com/theos/theos.git "$THEOS"
+          mkdir -p "$THEOS/sdks"
+          for v in 14.5 16.5; do
+            curl -fL "https://github.com/theos/sdks/releases/download/master-146e41f/iPhoneOS${v}.sdk.tar.xz" \
+              -o "$RUNNER_TEMP/iPhoneOS${v}.sdk.tar.xz"
+            tar -xf "$RUNNER_TEMP/iPhoneOS${v}.sdk.tar.xz" -C "$THEOS/sdks"
+          done
+          curl -fL https://github.com/xybp888/iOS-SDKs/releases/download/iOS-SDKs/iPhoneOS15.2.sdk.zip \
+            -o "$RUNNER_TEMP/iPhoneOS15.2.sdk.zip"
+          unzip -q "$RUNNER_TEMP/iPhoneOS15.2.sdk.zip" -d "$THEOS/sdks"
+          find "$THEOS/sdks/iPhoneOS15.2.sdk" -type f -name '*.tbd' \
+            -exec perl -i -pe 's/platform:\s+\(null\)/platform: ios/g' {} +
+
+      - name: Build & install trustcache
+        run: |
+          set -euxo pipefail
+          git clone --quiet https://github.com/CRKatri/trustcache "$RUNNER_TEMP/trustcache"
+          cd "$RUNNER_TEMP/trustcache"
+          arch="$(uname -m)"
+          export CFLAGS="${CFLAGS:-} -I$(brew --prefix openssl@3)/include -arch $arch"
+          export LDFLAGS="${LDFLAGS:-} -L$(brew --prefix openssl@3)/lib -arch $arch"
+          gmake -j"$(sysctl -n hw.logicalcpu)" OPENSSL=1
+          sudo cp trustcache /opt/procursus/bin/
+
+      - name: Download on-device bootstraps
+        run: |
+          set -euxo pipefail
+          cd Application/Dopamine/Resources
+          ./download_bootstraps.sh
+
+      - name: Build Dopamine
+        run: |
+          set -euxo pipefail
+          gmake -j"$(sysctl -n hw.logicalcpu)" NIGHTLY=1
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Dopamine-tipa
+          path: Application/Dopamine.tipa
+          if-no-files-found: error
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Dopamine-ipa
+          path: Application/Dopamine.ipa
+          if-no-files-found: error
