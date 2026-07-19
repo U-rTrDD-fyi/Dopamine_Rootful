@@ -5,6 +5,9 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreServices/LSApplicationProxy.h>
+#include <errno.h>
+#include <string.h>
+#include <unistd.h>
 
 int reboot3(uint64_t flags, ...);
 #define RB2_USERREBOOT (0x2000000000000000llu)
@@ -129,11 +132,22 @@ int main(int argc, char* argv[])
 		}
 	}
 	else if (!strcmp(cmd, "reboot_userspace")) {
-		// ADD /var/jb deletation here
-		const char *old_jb = "/var/jb";
-    	if (unlink(old_jb) == 0) {
-    		printf("OK: /var/jb unlinked\n");
-    	}
+		// Refresh the /var/jb compatibility symlink so it points at the current
+		// jbroot and SURVIVES the userspace reboot. Previously this only
+		// unlink()ed it and never recreated it, so every userspace reboot left
+		// the device with no /var/jb — breaking anything that hardcodes /var/jb
+		// paths (package managers / debs) even though the jailbreak itself was
+		// fine (internally everything uses absolute JBROOT_PATH).
+		const char *jbroot = get_jbroot();
+		unlink("/var/jb");
+		if (jbroot && jbroot[0]) {
+			if (symlink(jbroot, "/var/jb") == 0) {
+				printf("OK: /var/jb -> %s\n", jbroot);
+			}
+			else {
+				printf("WARNING: failed to recreate /var/jb -> %s (%s)\n", jbroot, strerror(errno));
+			}
+		}
 		return reboot3(RB2_USERREBOOT);
 	}
 	else if (!strcmp(cmd, "update")) {

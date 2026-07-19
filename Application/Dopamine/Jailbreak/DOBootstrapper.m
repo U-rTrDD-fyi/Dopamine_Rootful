@@ -582,15 +582,14 @@ typedef NS_ENUM(NSInteger, JBErrorCode) {
 
 - (int)installPackage:(NSString *)packagePath
 {
-//    if (getuid() == 0) {
-//        return exec_cmd_trusted(JBROOT_PATH("/usr/bin/dpkg"), "-i", packagePath.fileSystemRepresentation, NULL);
-//    }
-//    else {
-//        // idk why but waitpid sometimes fails and this returns -1, so we just ignore the return value
-//        exec_cmd(JBROOT_PATH("/basebin/jbctl"), "internal", "install_pkg", packagePath.fileSystemRepresentation, NULL);
-//        return 0;
-//    }
-    return 0;
+    if (getuid() == 0) {
+        return exec_cmd_trusted(JBROOT_PATH("/usr/bin/dpkg"), "-i", packagePath.fileSystemRepresentation, NULL);
+    }
+    else {
+        // idk why but waitpid sometimes fails and this returns -1, so we just ignore the return value
+        exec_cmd(JBROOT_PATH("/basebin/jbctl"), "internal", "install_pkg", packagePath.fileSystemRepresentation, NULL);
+        return 0;
+    }
 }
 
 - (int)uninstallPackageWithIdentifier:(NSString *)identifier

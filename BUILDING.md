@@ -147,6 +147,70 @@ ldid -SDopamine/Dopamine.entitlements build/.../Dopamine.app/Dopamine   # entitl
 A single `ldid -S<ents> <App.app>` also works but stamps the app's entitlements
 onto every nested framework (inert on iOS, but not what upstream produces).
 
+### 4.4 Runtime: "Install package manager" does nothing / Sileo never appears
+
+Not a build error — the app compiled and jailbroke fine, but tapping **Install
+package manager** (or picking one on first jailbreak) never installed Sileo/Zebra.
+Cause: `Application/Dopamine/Jailbreak/DOBootstrapper.m -installPackage:` had its
+entire body **commented out** and just `return 0;` — so `installPackageManagers`
+looped over the enabled managers and "succeeded" without ever running `dpkg`.
+
+**Fix** — restore the original implementation:
+```objc
+- (int)installPackage:(NSString *)packagePath {
+    if (getuid() == 0)
+        return exec_cmd_trusted(JBROOT_PATH("/usr/bin/dpkg"), "-i", packagePath.fileSystemRepresentation, NULL);
+    exec_cmd(JBROOT_PATH("/basebin/jbctl"), "internal", "install_pkg", packagePath.fileSystemRepresentation, NULL);
+    return 0;
+}
+```
+`reinstallPackageManagers` wraps this in `runAsRoot` (`setuid(0)`), so the
+`getuid()==0` branch runs `dpkg -i` on the bundled `sileo.deb` / `zebra.deb`
+(shipped in `Application/Dopamine/Resources`, copied into the `.app`). Those debs
+install `Sileo.app`/`Zebra.app` under `/var/jb/Applications/` and their `postinst`
+runs `uicache`, so the icons appear without any extra call. No BaseBin changes
+needed — `jbctl internal install_pkg` already implements the non-root path.
+
+> Incremental-rebuild gotcha: the `.include` target regenerates `xpc/xpc.h` every
+> run, which bumps its mtime and invalidates cached clang PCMs, giving
+> `fatal error: file '…/.include/xpc/xpc.h' has been modified since the module file
+> … was built`. It's stale-cache noise, not a code error — delete the clang
+> ModuleCache dirs (`.../C/clang/ModuleCache`, Xcode DerivedData
+> `ModuleCache.noindex`) and rebuild. Fresh CI runners never hit it.
+
+### 4.5 Runtime: `/var/jb` missing after every reboot (package managers break)
+
+Even with 4.4, installed package managers / debs still failed because `/var/jb`
+was **absent** on the running jailbreak. `/var/jb` is the compatibility symlink
+→ the real jbroot (`/private/preboot/<bootManifestHash>/dopamine-XXXXXX/procursus`);
+debs ship `/var/jb/...` paths and resolve through it. The core jailbreak works
+without it (internally everything uses absolute `JBROOT_PATH`), so the breakage is
+silent.
+
+`DOBootstrapper.m` *does* create `/var/jb` (in `prepareBootstrapWithCompletion:`),
+but every jailbreak ends in a userspace reboot, and `BaseBin/jbctl/src/main.m`'s
+`reboot_userspace` command **`unlink()`ed `/var/jb` immediately before rebooting
+and never recreated it** (a half-finished "delete stale symlink" idea — the
+recreate on the far side was missing). Net result: `/var/jb` is gone on every
+booted jailbreak. Confirmed on-device via timestamps (jbroot created 14:22,
+`/var/jb` never present until hand-made) and the tell-tale `OK: /var/jb unlinked`
+string in the deployed `jbctl`.
+
+**Fix** — `reboot_userspace` now *recreates* the symlink pointing at the current
+jbroot instead of only deleting it (jbctl already populates `rootPath` from
+`jbclient_get_jbroot()` at startup, so `get_jbroot()` is valid here):
+```c
+const char *jbroot = get_jbroot();
+unlink("/var/jb");
+if (jbroot && jbroot[0]) symlink(jbroot, "/var/jb");
+return reboot3(RB2_USERREBOOT);
+```
+Bonus: the in-app **Reboot Userspace** button used the same path, so it was also
+silently destroying `/var/jb` on every press — now fixed too. This is a BaseBin
+change, so it only reaches the device after installing the rebuilt `.tipa` **and**
+re-jailbreaking once (that re-extracts `basebin.tar`, regenerating the trustcache
+so the new `jbctl` is allowed to run).
+
 ---
 
 ## 5. GitHub Actions (`build.yml`) — what works / what to watch
