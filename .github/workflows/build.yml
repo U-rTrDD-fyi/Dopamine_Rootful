@@ -3,10 +3,21 @@ name: Build Dopamine (.tipa for TrollStore)
 on:
   workflow_dispatch:
   push:
-    branches: [main]
+    branches: [rootful-aio, main]
     paths-ignore:
       - '**.md'
       - '.gitignore'
+      # The vendored Sileo tree is built separately and does not affect the
+      # .tipa unless its rebuilt deb is committed to Resources.
+      - 'Sileo/**'
+      - 'docs/**'
+  pull_request:
+    branches: [rootful-aio]
+    paths-ignore:
+      - '**.md'
+      - '.gitignore'
+      - 'Sileo/**'
+      - 'docs/**'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
