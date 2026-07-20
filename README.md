@@ -40,6 +40,7 @@ Several sharp edges (notably `/usr/lib`) behave the opposite of how they look.
 | Package managers | Sileo, Zebra | patched Sileo only, installed automatically |
 | Legacy tweak signatures | not handled | re-signed to SHA-256 on install |
 | Update checks | opa334/Dopamine | this repo |
+| SSH | not bundled | `sshd` installed and auto-started (ports 22 / 2222) |
 
 ## Status
 

@@ -7,8 +7,9 @@ reading the code, so it is worth being precise about.
 
 ## The jbroot
 
-The bootstrap is Procursus' **rootless** `bootstrap-iphoneos-arm64.tar.zst`,
-extracted to a randomly named directory under the preboot volume:
+The bootstrap is Procursus' **rootless** `bootstrap-ssh-iphoneos-arm64.tar.zst`
+(the `-ssh` variant — see [SSH](#ssh) below), extracted to a randomly named
+directory under the preboot volume:
 
 ```
 /private/preboot/<bootManifestHash>/dopamine-XXXXXX/procursus
@@ -124,3 +125,32 @@ which left every booted jailbreak with no `/var/jb`.
 daemons: `installd` redirects `/Applications` to `/var/jb/Applications`, `lsd`
 and `SpringBoard` rebase paths through `JBROOT_PATH`, and `cfprefsd` redirects
 preference plists into the jbroot.
+
+## SSH
+
+The bundled bootstrap is the Procursus **`-ssh`** variant, so `sshd` and the
+OpenSSH client suite are installed on the first jailbreak — no separate package
+install needed. `download_bootstraps.sh` fetches it and it is bundled into the
+`.app`.
+
+The `com.openssh.sshd` LaunchDaemon lands in `<jbroot>/Library/LaunchDaemons`,
+which `launchdhook` (`daemon_hook.m`) already loads at boot. It is
+**socket-activated on ports 22 and 2222**, so launchd spawns `sshd` on the first
+connection every boot — there is no `RunAtLoad`, nothing to enable, and it
+survives every userspace reboot (it depends only on `/var/jb`, which the
+`reboot_userspace` symlink fix keeps alive).
+
+Default credentials from the bootstrap:
+
+- **`root` is locked** (`!` in `/var/jb/etc/master.passwd`). Password login as
+  root does not work until you set one (`passwd` over a `mobile` session) or add
+  a key to `/var/root/.ssh/authorized_keys`.
+- `PermitRootLogin yes` but `PasswordAuthentication` is left at its commented
+  default — so **key-based auth is the intended path**.
+
+For local debugging over USB:
+
+```bash
+iproxy 2222 2222 &
+ssh -p 2222 mobile@localhost      # then `passwd` / `sudo` as needed
+```
