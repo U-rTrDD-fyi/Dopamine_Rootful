@@ -33,6 +33,15 @@ pre-A12 hardware (A9, A10, A11) everything is arm64 and this does not apply.
 `DOBootstrapper -setupLegacyTweakSupport` runs from `finalizeBootstrap` on every
 jailbreak and is idempotent.
 
+**0. Bundles ElleKit.** ElleKit is the tweak loader — it ships `TweakLoader`,
+`CydiaSubstrate.framework` and provides `mobilesubstrate`, and nothing loads
+tweaks without it. It normally only arrives as a dependency of the first tweak,
+and its repo metadata is *not* `Multi-Arch: foreign`, so on a fresh device a
+legacy tweak's `mobilesubstrate` dependency cannot resolve until ellekit is both
+installed and marked. `finalizeBootstrap` installs the bundled `ellekit.deb`
+**before** the steps below, so the bridges and the `Multi-Arch` marking have it
+to work with. Everything after depends on ellekit being present first.
+
 **1. Registers the foreign architecture.**
 `dpkg --add-architecture iphoneos-arm`. The Procursus bootstrap ships no
 `var/lib/dpkg/arch`, so without this dpkg refuses the packages outright. Sileo
@@ -80,7 +89,10 @@ an interrupted write cannot truncate it.
 **4. Registers `dopamine-legacy-compat`.**
 A status entry providing the virtual packages legacy tweaks declare —
 `firmware`, `cydia`, `cy+cpu.*`, `cy+model.*` — which nothing on a rootless
-bootstrap provides. Procursus already ships bare virtual entries like this.
+bootstrap provides. Procursus already ships bare virtual entries like this. It
+also gets an empty `info/dopamine-legacy-compat.list`, without which dpkg warns
+"files list file … missing" on every transaction (the name is not
+arch-qualified — dpkg only does that for packages installed in multiple arches).
 
 ## What Sileo does
 
