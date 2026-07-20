@@ -15,6 +15,7 @@
 #import <sys/mount.h>
 #import <dlfcn.h>
 #import <sys/stat.h>
+#import <sys/utsname.h>
 #import "NSString+Version.h"
 
 #define LIBKRW_DOPAMINE_BUNDLED_VERSION @"2.0.3"
@@ -642,6 +643,171 @@ typedef NS_ENUM(NSInteger, JBErrorCode) {
     return [installedVersion numericalVersionRepresentation] < [bundledVersion numericalVersionRepresentation];
 }
 
+// APT resolves a foreign-arch package's dependencies within its own
+// architecture, so an iphoneos-arm tweak asking for "preferenceloader" wants
+// preferenceloader:iphoneos-arm - which does not exist, because that library
+// only ships as arm64. Marking installed packages "Multi-Arch: foreign" lets
+// the arm64 build satisfy those dependencies, which is correct here: the two
+// architectures are the same ABI, the label only ever encoded / vs /var/jb.
+- (void)markInstalledPackagesMultiArchForeign
+{
+    NSString *statusPath = JBROOT_PATH(@"/var/lib/dpkg/status");
+    NSString *status = [NSString stringWithContentsOfFile:statusPath encoding:NSUTF8StringEncoding error:nil];
+    if (!status.length) return;
+
+    NSArray<NSString *> *stanzas = [status componentsSeparatedByString:@"\n\n"];
+    NSMutableArray<NSString *> *patchedStanzas = [NSMutableArray arrayWithCapacity:stanzas.count];
+    NSUInteger packageCount = 0, patchedCount = 0;
+
+    for (NSString *stanza in stanzas) {
+        if (!stanza.length) continue;
+        if (![stanza hasPrefix:@"Package: "]) {
+            [patchedStanzas addObject:stanza];
+            continue;
+        }
+        packageCount++;
+
+        if ([stanza rangeOfString:@"\nMulti-Arch:"].location != NSNotFound) {
+            [patchedStanzas addObject:stanza];
+            continue;
+        }
+
+        NSRange firstNewline = [stanza rangeOfString:@"\n"];
+        if (firstNewline.location == NSNotFound) {
+            [patchedStanzas addObject:stanza];
+            continue;
+        }
+
+        [patchedStanzas addObject:[stanza stringByReplacingCharactersInRange:firstNewline
+                                                                  withString:@"\nMulti-Arch: foreign\n"]];
+        patchedCount++;
+    }
+
+    // Legacy packages also depend on virtual packages that only ever existed on
+    // rootful jailbreaks (firmware, cydia, cy+cpu.*, cy+model.*). Nothing
+    // provides them here, so register one entry that does. Procursus already
+    // ships bare virtual entries like this, so dpkg is happy with it.
+    if ([status rangeOfString:@"\nPackage: dopamine-legacy-compat\n"].location == NSNotFound
+        && ![status hasPrefix:@"Package: dopamine-legacy-compat\n"]) {
+        struct utsname systemInfo;
+        uname(&systemInfo);
+
+        NSOperatingSystemVersion osVersion = NSProcessInfo.processInfo.operatingSystemVersion;
+        NSString *firmwareVersion = [NSString stringWithFormat:@"%ld.%ld.%ld",
+                                     (long)osVersion.majorVersion,
+                                     (long)osVersion.minorVersion,
+                                     (long)osVersion.patchVersion];
+
+        [patchedStanzas addObject:[NSString stringWithFormat:
+            @"Package: dopamine-legacy-compat\n"
+            @"Status: install ok installed\n"
+            @"Priority: required\n"
+            @"Section: System\n"
+            @"Installed-Size: 0\n"
+            @"Maintainer: Dopamine\n"
+            @"Architecture: iphoneos-arm\n"
+            @"Multi-Arch: foreign\n"
+            @"Version: 1.0\n"
+            @"Provides: firmware (= %@), cydia, cy+cpu.arm64, cy+cpu.arm64v8, cy+model.%s, cy+lib.corefoundation\n"
+            @"Description: Legacy architecture compatibility shim\n"
+            @" Satisfies the virtual packages that iphoneos-arm packages declare so\n"
+            @" they resolve against this jailbreak's arm64 packages.",
+            firmwareVersion, systemInfo.machine]];
+        patchedCount++;
+    }
+
+    if (patchedCount == 0) return;
+
+    // Refuse to touch the database if it did not parse the way we expect.
+    if (packageCount == 0 || patchedStanzas.count < packageCount) return;
+
+    NSString *patched = [[patchedStanzas componentsJoinedByString:@"\n\n"] stringByAppendingString:@"\n\n"];
+
+    // Keep one pristine copy of the database from before we ever modified it.
+    NSString *backupPath = [statusPath stringByAppendingString:@".premultiarch"];
+    if (![[NSFileManager defaultManager] fileExistsAtPath:backupPath]) {
+        [[NSFileManager defaultManager] copyItemAtPath:statusPath toPath:backupPath error:nil];
+    }
+
+    // Write beside the real database, then swap it in atomically so an
+    // interrupted write can never leave dpkg with a truncated status file.
+    NSString *tempPath = [statusPath stringByAppendingString:@".dopamine-new"];
+    NSError *error = nil;
+    if (![patched writeToFile:tempPath atomically:YES encoding:NSUTF8StringEncoding error:&error]) return;
+    if (rename(tempPath.fileSystemRepresentation, statusPath.fileSystemRepresentation) != 0) {
+        [[NSFileManager defaultManager] removeItemAtPath:tempPath error:nil];
+    }
+}
+
+// Legacy (iphoneos-arm) tweaks were built for a jailbreak that owned the real
+// filesystem, so they hardcode rootful paths and declare the rootful arch.
+// bootstrapfs already gives us writable /usr and /Library volumes, so rather
+// than rewriting each package we point the paths they expect at the jbroot and
+// tell dpkg the arch is acceptable. Idempotent: runs on every jailbreak.
+- (void)setupLegacyTweakSupport
+{
+    // 1. Let dpkg/apt (and therefore Sileo) accept iphoneos-arm packages.
+    //    dpkg ignores this if the architecture is already registered.
+    exec_cmd_trusted(JBROOT_PATH("/usr/bin/dpkg"), "--add-architecture", "iphoneos-arm", NULL);
+
+    // 2. Point the paths legacy tweaks link against at their jbroot equivalents.
+    //    Targets go through /var/jb rather than the current jbroot so they stay
+    //    valid if the jbroot directory is regenerated.
+    NSDictionary<NSString *, NSString *> *compatibilityLinks = @{
+        // Legacy tweaks drop dylib+plist here; ellekit only scans TweakInject.
+        @"/Library/MobileSubstrate/DynamicLibraries": @"/var/jb/usr/lib/TweakInject",
+        // Substrate's framework, linked by nearly every pre-rootless tweak.
+        @"/Library/Frameworks/CydiaSubstrate.framework": @"/var/jb/Library/Frameworks/CydiaSubstrate.framework",
+        @"/usr/lib/libsubstrate.dylib": @"/var/jb/usr/lib/libsubstrate.dylib",
+        @"/usr/lib/libhooker.dylib": @"/var/jb/usr/lib/libhooker.dylib",
+        @"/usr/lib/libellekit.dylib": @"/var/jb/usr/lib/libellekit.dylib",
+    };
+
+    for (NSString *linkPath in compatibilityLinks) {
+        NSString *targetPath = compatibilityLinks[linkPath];
+
+        // Nothing to link to (e.g. ellekit not installed yet) - skip quietly.
+        if (![[NSFileManager defaultManager] fileExistsAtPath:targetPath]) continue;
+
+        NSDictionary *attributes = [[NSFileManager defaultManager] attributesOfItemAtPath:linkPath error:nil];
+        if (attributes) {
+            if (attributes[NSFileType] == NSFileTypeDirectory) {
+                // dpkg deletes these symlinks when the last package owning the
+                // directory is removed, and the next install then unpacks into a
+                // real directory - where nothing will ever look for the tweaks.
+                // Move anything stranded there across, then restore the link.
+                NSArray<NSString *> *contents = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:linkPath error:nil];
+                for (NSString *item in contents) {
+                    NSString *source = [linkPath stringByAppendingPathComponent:item];
+                    NSString *destination = [targetPath stringByAppendingPathComponent:item];
+                    [[NSFileManager defaultManager] removeItemAtPath:destination error:nil];
+                    [[NSFileManager defaultManager] moveItemAtPath:source toPath:destination error:nil];
+                }
+
+                // Only discard the directory if everything really moved, so a
+                // failed move can never destroy a tweak.
+                if ([[NSFileManager defaultManager] contentsOfDirectoryAtPath:linkPath error:nil].count > 0) continue;
+                [[NSFileManager defaultManager] removeItemAtPath:linkPath error:nil];
+            }
+            else if (attributes[NSFileType] != NSFileTypeSymbolicLink) {
+                // A real file is already there - it may hold user data, so leave
+                // it alone rather than clobbering it.
+                continue;
+            }
+            else {
+                NSString *existingTarget = [[NSFileManager defaultManager] destinationOfSymbolicLinkAtPath:linkPath error:nil];
+                if ([existingTarget isEqualToString:targetPath]) continue;
+                [[NSFileManager defaultManager] removeItemAtPath:linkPath error:nil];
+            }
+        }
+
+        [self createSymlinkAtPath:linkPath toPath:targetPath createIntermediateDirectories:YES];
+    }
+
+    // 3. Let arm64 libraries satisfy the dependencies legacy packages declare.
+    [self markInstalledPackagesMultiArchForeign];
+}
+
 - (NSError *)finalizeBootstrap
 {
     // Initial setup on first jailbreak
@@ -695,6 +861,8 @@ typedef NS_ENUM(NSInteger, JBErrorCode) {
             if (r != 0) return [NSError errorWithDomain:bootstrapErrorDomain code:BootstrapErrorCodeFailedFinalising userInfo:@{NSLocalizedDescriptionKey : [NSString stringWithFormat:@"Failed to install basebin link: %d\n", r]}];
         }
     }
+
+    [self setupLegacyTweakSupport];
 
     return nil;
 }
