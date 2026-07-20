@@ -2,6 +2,7 @@
 #import <Foundation/Foundation.h>
 #import <libjailbreak/libjailbreak.h>
 #import <sys/mount.h>
+#import <unistd.h>
 
 SInt32 CFUserNotificationDisplayAlert(CFTimeInterval timeout, CFOptionFlags flags, CFURLRef iconURL, CFURLRef soundURL, CFURLRef localizationURL, CFStringRef alertHeader, CFStringRef alertMessage, CFStringRef defaultButtonTitle, CFStringRef alternateButtonTitle, CFStringRef otherButtonTitle, CFOptionFlags *responseFlags) API_AVAILABLE(ios(3.0));
 
@@ -227,7 +228,17 @@ int jbctl_handle_internal(const char *command, int argc, char* argv[])
 			CFUserNotificationDisplayAlert(0, 2/*kCFUserNotificationCautionAlertLevel*/, NULL, NULL, NULL, CFSTR("Watchdog Timeout"), (__bridge CFStringRef)printMessage, NULL, NULL, NULL, NULL);
 			free(panicMessage);
 		}
-		exec_cmd(JBROOT_PATH("/usr/bin/uicache"), "-a", NULL);
+		// Rebuild the icon cache after the userspace reboot. This daemon fires
+		// at RunAtLoad, early in the boot, and on the boot right after a
+		// (re)jailbreak that installed a new app - e.g. Sileo on the first
+		// jailbreak - installd may not yet have its rootless redirect active, so
+		// a single uicache here rebuilds without the new app and it never shows
+		// on the Home Screen until uicache is run again by hand. Rebuild a few
+		// times over a short window so the refresh lands once installd is ready.
+		for (int attempt = 0; attempt < 3; attempt++) {
+			exec_cmd(JBROOT_PATH("/usr/bin/uicache"), "-a", NULL);
+			if (attempt < 2) sleep(4);
+		}
 	}
 	else if (!strcmp(command, "install_pkg")) {
 		if (argc > 1) {
