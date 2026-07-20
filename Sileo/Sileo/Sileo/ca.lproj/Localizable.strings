@@ -1,0 +1,247 @@
+/* 
+  Localizable.strings
+  Sileo
+
+  Created by AppleBetas on 2018-12-27.
+  Copyright © 2018 CoolStar. All rights reserved.
+ 
+ LOCALISATIONS
+*/
+// Common Prompts
+
+"About" = "Sobre";
+"Close" = "Tancar";
+"Double tap to open." = "Toqueu dues vegades per obrir.";
+"Untitled_Repo" = "Repositori sense títol";
+"OK" = "D'acord";
+"Done" = "Fet";
+"Done_Editing" = "Fet";
+"More_Info" = "Més informació";
+"Loading" = "S'està carregant…";
+"Share" = "Comparteix";
+"Delete" = "Esborra";
+"Cancel" = "Cancel·lar";
+"Acknowledge" = "Reconeixement";
+"Remove" = "Suprimeix";
+"Sileo_Team" = "Equip Sileo";
+"Warning" = "Advertència";
+"Edit" = "Editar";
+"Why" = "Why";
+"Deny" = "Deny";
+"Accept" = "Accept";
+
+// Popup messages
+"Background_App_Refresh" = "Actualització de l'aplicació en segon pla";
+"Background_App_Refresh_Message" = "Per obtenir la millor i més ràpida experiència, es recomana activar l'actualització de l'aplicació en segon pla. També podeu rebre notificacions quan s'actualitzin els vostres tweaks!";
+"Upgrade_All_Shortcut_Processing_Message" = "Actualitzant totes les fonts i actualitzant tots els paquets...";
+
+// Statuses for queued/downloading packages. Shown under their name in the queue/status popup.
+"Installing_Package_Status" = "S'està instal·lant";
+"Downloading_Package_Status" = "S’està baixant";
+"Queued_Package_Status" = "A la cua";
+"Ready_Status" = "A punt";
+"Removal_Queued_Package_Status" = "En cua per a l'eliminació";
+"Download_Starting" = "S'està iniciant…";
+"Download_Progress" = "%@ de %@"; // first %@ = amount downloaded, second %@ = total to download
+
+"Essential_Warning" = "Els paquets següents s'enumeren com a essencials/obligatoris: %@\n L'eliminació d'aquests podria causar danys irreversibles al vostre dispositiu i és possible que hagis de restaurar el dispositiu. Continueu només si esteu segur de saber el que esteu fent.";
+
+"Queue_Confirm_Button" = "Confirma-ho";
+"Queue_Clear_Button" = "Esborrar la cua";
+"Queue_Cancel_Downloads" = "Cancel·la la baixada";
+
+"Package_Upgrade_Action" = "Actualitzar";
+"Package_Reinstall_Action" = "Reinstal·lar";
+"Package_Uninstall_Action" = "Desinstal·lar";
+"Package_Modify_Action" = "Modificar";
+"Package_Get_Action" = "Obté";
+"Package_Queue_Action" = "Cua";
+"Package_Cancel_Action" = "Cancel·lar";
+"Package_Paid" = "De pagament";
+
+"Package_Share_Action" = "Compartir paquet ";
+"Package_Developer_Find_Action" = "Més d'aquest desenvolupador";
+"Package_Support_Action" = "Assistència";
+"Package_Hold_Enable_Action" = "Ignora futures actualitzacions";
+"Package_Hold_Disable_Action" = "No ignoris les actualitzacions";
+"Package_Wishlist_Add" = "Afegir a la llista de desitjos";
+"Package_Wishlist_Remove" = "Eliminar de la llista de desitjos";
+"Wishlist" = "Llista de desitjos";
+
+"No_New_Packages" = "No hi ha paquets nous";
+"News_Check_Later" = "Encara no hi ha paquets nous indexats. Torna d'aquí a unes hores i hauríeu de veure que els paquets comencen a aparèixer aquí a mesura que s'actualitzen els repositoris.";
+
+// Headings for sections in the queue/status popup.
+"Queued_Install_Heading" = "Instal·lar";
+"Queued_Uninstall_Heading" = "Desinstal·lar";
+"Queued_Update_Heading" = "Actualitzar";
+"Download_Errors_Heading" = "Error";
+
+"Installed_Heading" = "Instal·lat";
+"Updates_Heading" = "Actualitzacions";
+"Upgrade_All_Button" = "Actualitzar tot";
+"Package_Search.Placeholder" = "Cerca paquets";
+"Sort_Name" = "Nom";
+"Sort_Date" = "Data";
+"Sort_Install_Size" = "Tamany";
+"Sort_By" = "Ordena per:";
+
+"Package_Unavailable" = "Paquet no disponible";
+"Package_By_Author" = "%@ per %@"; // first %@ = package name, second %@ = author name
+"By_Author" = "per %@"; // %@ = author name
+"Packages_By_Author" = "Paquets per %@"; // %@ = author name
+
+"Featured_Page" = "Destacat";
+"News_Page" = "Nou";
+"Sources_Page" = "Fonts";
+"Packages_Page" = "Paquets";
+"Search_Page" = "Cercar";
+"Search_History" = "Cerques recents";
+"Clear_Search_History" = "Esborrar";
+"Refreshing_Sources_Page" = "Actualitzar les fonts";
+"Package_Installed_Files_Page" = "Arxius instal·lats";
+"Refresh" = "Refrescar";
+"Remove" = "Remove";
+
+"All_Packages.Title" = "Tots els paquets";
+"All_Packages.Cell_Subtitle" = "Consulteu tots els paquets de les vostres fonts";
+
+"All_Categories" = "Totes les categories";
+"Internal_Repo" = "Repositoris interns";
+"External_Repo" = "Repositoris externs";
+"Ignored Updates" = "Actualitzacions ignorades";
+
+"Repos" = "Repositoris";
+"Repo" = "Repositori";
+
+"Add_Source.Title" = "Afegir fonts";
+"Add_Source.Body" = "Afegir APT URL
+";
+"Add_Source.Button.Add" = "Afegir fonts";
+"Add_Dist_Repo" = "Afegeix dist repositori";
+"Incorrect_Repo" = "Sembla que %@ no és un repositori vàlid⁉️ És possible que el repositori estigui fora de línia o que l'hagueu introduït incorrectament. El voleu afegir de totes maneres?";
+
+"Auto_Add_Pasteboard_Sources.Button.Manual" = "Introduïu manualment";
+
+"Untitled_Form" = "Formulari sense títol";
+"Form_Submitted.Default_Title" = "Formulari enviat";
+"Form_Submitted.Default_Body" = "El formulari s'ha enviat correctament.";
+
+"Web_Depiction_Deprecated_Warning" = "Les representacions de Web View estan obsoletes. Si us plau, poseu-vos en contacte amb el responsable del repositori sobre l'actualització a representacions natives.";
+
+"Package_Details_Tab" = "Detalls";
+"Package_Changelog_Tab" = "Historial de canvis";
+"Package_No_Description_Available" = "No disposem de descripció per aquest ítem.";
+"Package_Changelogs_Unavailable" = "Els registres de canvis no estan disponibles per a aquest paquet.";
+
+"Installed_Package_Header" = "Paquets instal•lats";
+"Installed_Packages" = "Paquets instal•lats";
+"Version" = "Versió";
+"Show_Package_Contents_Button" = "Mostra el contingut del paquet";
+
+"Licenses_Page_Title" = "Llicències";
+"Alternate_Icon_Title" = "Icones alternatives";
+
+"Settings_Payment_Provider_Heading" = "Proveïdors de pagament";
+"Settings_Translations_Heading" = "Traduccions";
+
+"Settings_Payment_Provider.Purchases_Heading" = "Compres";
+"Settings_Payment_Provider.No_Purchases" = "Cap compres";
+"Authenticate_To_Purchase" = "Autentificar_Per_Comprar";
+
+"Settings" = "Paràmetres";
+"Settings_Page_Title" = "Paràmetres";
+"Dark_Mode_Toggle" = "Dark mode";
+"Theme" = "Tema";
+"Tint_Color" = "Tint_Color";
+"Reset_Tint_Color" = "Restableix_El_Color_Del_Tint";
+"Auto_Complete_Queue" = "Cua completa automàtica";
+"Show_Search_History" = "Mostra l'historial de cerques";
+"Auto_Confirm_Upgrade_All_Shortcut" = "Confirmació automàtica de l'actualització de totes les dreceres";
+"Swipe_Actions" = "Accions de lliscar";
+"Show_Provisional" = "Mostra els paquets de Canister";
+"Show_Ignored_Updates" = "Mostra les actualitzacions ignorades";
+"Developer_Mode" = "Mode de desenvolupador";
+"Pog_Developer" = "Ara ets un desenvolupador!";
+"Developer_Mode_Explain" = "El mode de desenvolupador desactiva el requisit HTTPS de l'API de pagament.";
+"Auto_Refresh_Sources" = "Actualització de fonts automàtica";
+"iCloud_Profile" = "Mostra la imatge d'iCloud a Destacats";
+"Cache_Size" = "Mida de la memòria cache";
+"Clear_Cache" = "Esborra la memòria cache de xarxa";
+"Clear_Cache_Message" = "Voleu esborrar la memòria cache de la xarxa? Això alliberarà %@";
+"Language" = "Llenguatge";
+"Use_System_Language" = "Utilitza l'idioma del sistema";
+"Apply_Changes" = "Aplica els canvis";
+"Apply_Changes_Confirm" = "L'aplicació dels canvis requerirà un reinici de Sileo";
+"Help_Translate" = "Ajuda'ns a traduir!";
+"Always_Show_Install_Log" = "Mostra sempre el registre d'instal·lació";
+"Auto_Show_Queue" = "Mostra la cua a l'actualització de tots";
+
+"Sileo_Light" = "Sileo clar";
+"Sileo_Dark" = "Sileo fosc";
+"Sileo_Adaptive" = "Sileo automàtic";
+"System" = "Sistema";
+"Theme_Settings" = "Paràmetres configurables del tema";
+
+"Manage_Themes" = "Administrar temes";
+"Create_Theme" = "Crea un tema";
+"Import_Themes" = "Importar tema";
+"Theme_Name" = "Nom del tema";
+"Export_Themes" = "Exportar tema";
+
+"Background_Color" = "Color de fons";
+"Secondary_Background_Color" = "Color de fons secundari";
+"Label_Color" = "Color de l'etiqueta";
+"Highlight_Color" = "Color destacat";
+"Seperator_Color" = "Color del separador";
+"Header_Color" = "Color de la capçalera";
+"Banner_Color" = "Color del banner";
+
+
+"Cydia_Sign_In" = "Inicieu la sessió a Cydia Store";
+"Payment_Provider_Signed_In" = "S'ha iniciat la sessió";
+"Payment_Provider_Signed_In_With_Name" = "Sessió iniciada com a %@"; // %@ = user's name
+"Payment_Provider_Sign_Out" = "Tanca la sessió";
+"Payment_Provider_Sign_Out_Confirm.Title" = "Tancar la sessió de %@"; // %@ = payment provider name
+"Payment_Provider_Sign_Out_Confirm.Body" = "Ja no podreu baixar els vostres paquets comprats fins que torneu a iniciar la sessió.";
+
+"Show_Install_Details" = "Mostra els detalls";
+"Hide_Install_Details" = "Amaga els detalls";
+"Open_In_Filza" = "Obrir en Filza";
+"Copy_Path" = "Copiar ruta";
+
+"After_Install_Relaunch" = "Reiniciar Sileo";
+"After_Install_Respring" = "Reiniciar SpringBoard";
+"After_Install_Reboot" = "Reinicia el dispositiu";
+"After_Install_Relaunch_Later" = "Reinicieu Sileo més tard";
+"After_Install_Respring_Later" = "Reinicieu SpringBoard més tard";
+"After_Install_Reboot_Later" = "Reinicieu el dispositiu més tard";
+
+"Dangerous_Repo.Title" = "Repo perillós";
+"Dangerous_Repo.Body" = "Esteu intentant afegir un repositori que se sap que és perjudicial per motius com ara la pirateria, el contingut il·legal o el programari maliciós.\n\nEls repositoris marcats com a nocius solen distribuir programari amb efectes inesperats, ja sigui en forma de paquets de pagament gratuïts o d'altres paquets maliciosos. Això pot tenir efectes duradors en el vostre dispositiu i privadesa, fins i tot afectant de vegades la vostra capacitat de fer jailbreak. Us recomanem que extremeu la precaució per evitar programari nociu.";
+"Dangerous_Repo.Continue" = "Accepto els riscos, segueix";
+"Dangerous_Repo.Cancel" = "Anar enrere";
+"Dangerous_Repo.Last_Chance.Title" = "Vols afegir un repo perjudicial?";
+"Dangerous_Repo.Last_Chance.Body" = "Els repos perillosos poden tenir efectes devastadors en la vostra capacitat d'utilitzar el vostre dispositiu o jailbreak. Us recomanem que torneu per la vostra seguretat. Esteu segur que voleu afegir %@?"; // %@ = repo url
+"Dangerous_Repo.Last_Chance.Continue" = "Continua";
+"Dangerous_Repo.Last_Chance.Cancel" = "Torna enrere";
+
+// All export-based strings
+"Export" = "Exportar";
+"Export_Packages" = "Voleu exportar la vostra llista de paquets? Això copiarà tots els noms de paquets i les seves versions al porta-retalls.";
+"Export_Sources" = "Voleu exportar la vostra llista d'origen? Això copiarà tots els URL d'origen al porta-retalls.";
+"Export_Yes" = "Sí, còpia.";
+"Export_No" = "No, anul·lar.";
+
+// Depcitions
+"View_Depiction" = "Veure representació";
+
+"Copy_ID" = "còpia l'identificador";
+"Canister_Policy" = "Canister Privacy Policy";
+"Download_Analytics" = "Download Analytics";
+"Provided_Canister" = "Provided by Canister";
+"Data_Collected" = "Data collected is used to update the featured page and various recommendation sources.";
+"Change_Later" = "You can always change your choice later.";
+"Whats_Collected" = "What's Collected";
+"Non_Identifying" = "Only package and non-identifying device information is collected.";
+"Privacy_Policy" = "Privacy Policy";

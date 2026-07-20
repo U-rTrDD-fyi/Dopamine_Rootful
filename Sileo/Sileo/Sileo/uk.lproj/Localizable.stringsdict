@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>Auto_Add_Pasteboard_Sources.Title</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>Автоматично Додати %#@sources@</string>
+      <key>sources</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>lu</string>
+        <key>one</key>
+        <string>Джерело</string>
+        <key>few</key>
+        <string>Джерела</string>
+        <key>many</key>
+        <string>Джерела</string>
+        <key>other</key>
+        <string>Джерела</string>
+      </dict>
+    </dict>
+    <key>Auto_Add_Pasteboard_Sources.Button.Add</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>Додати %lu %#@sources@</string>
+      <key>sources</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>lu</string>
+        <key>one</key>
+        <string>Джерело</string>
+        <key>few</key>
+        <string>Джерела</string>
+        <key>many</key>
+        <string>Джерела</string>
+        <key>other</key>
+        <string>Джерела</string>
+      </dict>
+    </dict>
+    <key>Auto_Add_Pasteboard_Sources.Body_Intro</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>Додати знайдені %#@urls@ в буфері обміну:</string>
+      <key>urls</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>lu</string>
+        <key>one</key>
+        <string>Посилання</string>
+        <key>few</key>
+        <string>Посилання</string>
+        <key>many</key>
+        <string>Посилання</string>
+        <key>other</key>
+        <string>Посилання</string>
+      </dict>
+    </dict>
+    <key>Package_Queue_Count</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>%#@packages@</string>
+      <key>packages</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>one</key>
+        <string>%d пакет</string>
+        <key>few</key>
+        <string>%d пакети</string>
+        <key>many</key>
+        <string>%d пакетів</string>
+        <key>other</key>
+        <string>%d пакетів</string>
+      </dict>
+    </dict>
+  </dict>
+</plist>

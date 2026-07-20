@@ -1,0 +1,246 @@
+/* 
+  Localizable.strings
+  Sileo
+
+  Created by AppleBetas on 2018-12-27.
+  Copyright © 2018 CoolStar. All rights reserved.
+ 
+ LOCALISATIONS
+*/
+// Common Prompts
+
+"About" = "دەربارە";
+"Close" = "داخستن";
+"Double tap to open." = "دووجار پەنجە بنێ بۆ کردنەوە.";
+"Untitled_Repo" = "کۆگای بێ ناونیشان";
+"OK" = "باشە";
+"Done" = "تەواو";
+"Done_Editing" = "تەواو";
+"More_Info" = "زانیاری زیاتر";
+"Loading" = "بارکردن…";
+"Share" = "هاوبەشکردن";
+"Delete" = "سڕینەوە";
+"Cancel" = "پاشگەزبوونەوە";
+"Acknowledge" = "دان پێدانان";
+"Remove" = "لابردن";
+"Sileo_Team" = "تیمی sileo";
+"Warning" = "ئاگاداری";
+"Edit" = "دەستکاری کردن";
+"Why" = "Why";
+"Deny" = "Deny";
+"Accept" = "Accept";
+
+// Popup messages
+"Background_App_Refresh" = "نوێکردنەوەی ئەپی پاشبنەما";
+"Background_App_Refresh_Message" = "بۆ باشترین و خێراترین ئەزموون، پێشنیار دەکرێت نوێکردنەوەی ئەپی پاشبنەما چالاک بکەیت. هەروەها دەتوانیت ئاگادارکردنەوە بەدەست بهێنیت کاتێک تویکەکانت نوێ دەکرێنەوە!";
+"Upgrade_All_Shortcut_Processing_Message" = "تازەکردنەوەی هەموو سەرچاوەکان و نوێکردنەوەی هەموو پاکێچەکان...";
+
+// Statuses for queued/downloading packages. Shown under their name in the queue/status popup.
+"Installing_Package_Status" = "دامەزراندن";
+"Downloading_Package_Status" = "دادەبەزێت";
+"Queued_Package_Status" = "لە نۆرەدایە";
+"Ready_Status" = "ئامادەیە";
+"Removal_Queued_Package_Status" = "لە نۆرەدایە بۆ لابردن";
+"Download_Starting" = "دەستپێدەکات…";
+"Download_Progress" = "%@ لە %@"; // first %@ = amount downloaded, second %@ = total to download
+
+"Essential_Warning" = "ئەم پاکێجانەی خوارەوە وەک پێویست/ ڕیزکراون: %@\n لابردنی ئەمانە دەتوانێت ببێتە هۆی زیانێکی نەگەڕاوە بە ئامێرەکەت و لەوانەیە پێویستت بە گەڕاندنەوەی هەبێت. تەنها بەردەوام بە ئەگەر دڵنیا بیت کە دەزانیت چی دەکەیت.";
+
+"Queue_Confirm_Button" = "دڵنیابوون";
+"Queue_Clear_Button" = "پاککردنەوەی ڕیزبەندییەکە";
+"Queue_Cancel_Downloads" = "پاشگەزبوونەوە لە دابەزاندن";
+
+"Package_Upgrade_Action" = "نوێکردنەوە";
+"Package_Reinstall_Action" = "دووبارە دامەزراندنەوە";
+"Package_Uninstall_Action" = "سڕینەوە";
+"Package_Modify_Action" = "دەستکاری بکە";
+"Package_Get_Action" = "بەدەستهێنان";
+"Package_Queue_Action" = "ڕیزبەند";
+"Package_Cancel_Action" = "پاشگەزبوونەوە";
+"Package_Paid" = "پارە پێدراو";
+
+"Package_Share_Action" = "هاوبەشی پاکێج…";
+"Package_Developer_Find_Action" = "زیاتر لەلایەن ئەم گەشەپێدەرە";
+"Package_Support_Action" = "پاڵپشتی";
+"Package_Hold_Enable_Action" = "گوێپێنەدان بە وەشانی داهاتوو";
+"Package_Hold_Disable_Action" = "وەستاندنی گوێپێنەدان بە وەشانەکان";
+"Package_Wishlist_Add" = "زیادکردن بۆ لیستی هیوا";
+"Package_Wishlist_Remove" = "لابردنی لە لیستی هیوا";
+"Wishlist" = "لیستی هیوا";
+
+"No_New_Packages" = "هیچ پاکێجێکی نوێ نییە";
+"News_Check_Later" = "هێشتا هیچ پاکێجێکی نوێ ئیندێکس نەکراوە. چەند کاتژمێرێکی تر وەرەوە و پێویستە ببینیت پاکێجەکان لێرە دەست دەکەن بە دەرکەوتن لەگەڵ نوێکردنەوەی کۆگاکان.";
+
+// Headings for sections in the queue/status popup.
+"Queued_Install_Heading" = "دامەزراندن";
+"Queued_Uninstall_Heading" = "سڕینەوە";
+"Queued_Update_Heading" = "نوێکردنەوە";
+"Download_Errors_Heading" = "هەڵەکان";
+
+"Installed_Heading" = "دامەزرا";
+"Updates_Heading" = "نوێکردنەوەکان";
+"Upgrade_All_Button" = "نوێکردنەوەی هەموو";
+"Package_Search.Placeholder" = "گەڕان بەدوای پاکێجەکان";
+"Sort_Name" = "ناو";
+"Sort_Date" = "بەروار";
+"Sort_Install_Size" = "قەبارەی دامەزێندراو";
+"Sort_By" = "ڕیزکردن بە:";
+
+"Package_Unavailable" = "پاکێج بەردەست نییە";
+"Package_By_Author" = "%@ تا %@"; // first %@ = package name, second %@ = author name
+"By_Author" = "تا %@"; // %@ = author name
+"Packages_By_Author" = "پاکێجەکان بە %@"; // %@ = author name
+
+"Featured_Page" = "تایبەتمەندی";
+"News_Page" = "نوێ";
+"Sources_Page" = "سەرچاوەکان";
+"Packages_Page" = "پاکێجەکان";
+"Search_Page" = "گەڕان";
+"Search_History" = "گەڕانەکانی ئەمدوایە";
+"Clear_Search_History" = "سڕینەوە";
+"Refreshing_Sources_Page" = "نوێکردنەوەی سەرچاوەکان";
+"Package_Installed_Files_Page" = "فایلە دامەزرێندراوەکان";
+"Refresh" = "نوێکردنەوە";
+"Remove" = "Remove";
+
+"All_Packages.Title" = "هەموو پاکێجەکان";
+"All_Packages.Cell_Subtitle" = "بینینی هەموو ئەو پاکێجانەی لە سەرچاوەکانت هەیە";
+
+"All_Categories" = "هەموو پۆلەکان";
+"Internal_Repo" = "کۆگا ناوەکییەکان";
+"External_Repo" = "کۆگا دەرەکییەکان";
+"Ignored Updates" = "ئەپدەیتە گوێپێنەدراوەکان";
+
+"Repos" = "کۆگاکان";
+"Repo" = "کۆگا";
+
+"Add_Source.Title" = "زیادکردنی سەرچاوە";
+"Add_Source.Body" = "زیادکردنی APT URL";
+"Add_Source.Button.Add" = "زیادکردنی سەرچاوە";
+"Add_Dist_Repo" = "زیادکردنی کۆگای دیست";
+"Incorrect_Repo" = "%@دەرناکەوێت کە کۆگایەکی ڕاست ببێت ، لەوانەیە کۆگاکەئۆفڵاین بێت یان لەوانەیە تۆ نووسیبێتت بە هەڵە. دەتەوێت زیادی بکەیت بەهەرحاڵ?";
+
+"Auto_Add_Pasteboard_Sources.Button.Manual" = "دانانی بە دەستکردی";
+
+"Untitled_Form" = "فۆڕمێکی ناولێنەندراوە";
+"Form_Submitted.Default_Title" = "فۆڕمێکی نێردراوە";
+"Form_Submitted.Default_Body" = "فۆڕمەکە بە سەرکەوتووی نێردرا.";
+
+"Web_Depiction_Deprecated_Warning" = "وێناکردنی دیمەنی وێب بەکارنەهاتووە. تکایە پەیوەندی بە پارێزەری کۆگا بکە سەبارەت بە نوێکردنەوە بۆ وێناکردنی ڕەسەن.";
+
+"Package_Details_Tab" = "وردەکارییەکان";
+"Package_Changelog_Tab" = "گۆڕانکارییەکان";
+"Package_No_Description_Available" = "هیچ وەسفێک بۆ ئەم پاکێجە لەبەردەستدا نییە.";
+"Package_Changelogs_Unavailable" = "گۆڕانکارییەکان بۆ ئەم پاکێجە بەردەست نین.";
+
+"Installed_Package_Header" = "پاکێجی دامەزرێندراو";
+"Installed_Packages" = "پاکێجە دامەزرێندراوەکان";
+"Version" = "وەشان";
+"Show_Package_Contents_Button" = "نیشاندانی بەرهەمەکانی پاکێج";
+
+"Licenses_Page_Title" = "مۆڵەتەکان";
+"Alternate_Icon_Title" = "ئایکۆنە جێگرەوەکان";
+
+"Settings_Payment_Provider_Heading" = "دابینکەرەکانی پارەدان";
+"Settings_Translations_Heading" = "وەرگێڕەکان";
+
+"Settings_Payment_Provider.Purchases_Heading" = "کڕینەکان";
+"Settings_Payment_Provider.No_Purchases" = "هیچ کڕینێک نییە";
+"Authenticate_To_Purchase" = "ناسینەوە بکە تۆ تەواوکردنی کڕینەکەت";
+
+"Settings" = "ڕێکخستنەکان";
+"Settings_Page_Title" = "ڕێکخستنەکان";
+"Dark_Mode_Toggle" = "دۆخی تاریک";
+"Theme" = "ڕوکار";
+"Tint_Color" = "ڕەنگی ڕەنگاوڕەنگ";
+"Reset_Tint_Color" = "ڕەنگی ڕەنگاوڕەنگ بهێنەوە سەرەتا";
+"Auto_Complete_Queue" = "نۆرە بە شێوەیەکی ئۆتۆماتیکی";
+"Show_Search_History" = "پیشاندانی مێژوی گەڕان";
+"Auto_Confirm_Upgrade_All_Shortcut" = "ئۆتۆماتیکی پشتڕاستکردنەوەی بەرزکردنەوەی هەموو شۆرتکەتێک";
+"Swipe_Actions" = "کردارەکانی بەلادا";
+"Show_Provisional" = "پاکێجەکان لە کانستەرەوە پیشان بدە";
+"Show_Ignored_Updates" = "نیشاندانی وەشانە گوێپێنەدراوەکان";
+"Developer_Mode" = "دۆخی گەشەپێدەر";
+"Pog_Developer" = "تۆ ئێستا گەشەپێدەریت!";
+"Developer_Mode_Explain" = "دۆخی گەشەپێدەر پێویستی HTTPS ی API ی پارەدان لەکاردەخات.";
+"Auto_Refresh_Sources" = "نوێکردنەوەی سەچاوەکان بە ئۆتۆماتیکی";
+"iCloud_Profile" = "وێنەی ئایکلاود لە تایبەتمەندیدا پیشان بدە";
+"Cache_Size" = "قەبارەی کەیچ";
+"Clear_Cache" = "پاک کردنەوەی کەیچی تۆڕ";
+"Clear_Cache_Message" = "دەتەوێت کەیچی تۆڕەکە پاک بکەیتەوە؟ بەم شێوەیە %@ ئازاد دەبێت";
+"Language" = "زمان";
+"Use_System_Language" = "بەکارهێنانی زمانی سیستمەکە";
+"Apply_Changes" = "گۆڕانکارییەکان جێبەجێ بکە";
+"Apply_Changes_Confirm" = "جێبەجێکردنی گۆڕانکارییەکان پێویستی بە دووبارە دەستپێکردنەوەی بەرنامەی سیلیۆ دەبێت";
+"Help_Translate" = "یارمەتی بدە بۆ وەرگێڕانی سیلیۆ";
+"Always_Show_Install_Log" = "هەمیشە نیشاندانی لۆگی دامەزراندن";
+"Auto_Show_Queue" = "نیشاندانی نۆرە بۆ نوێکردنەوەی هەموو";
+
+"Sileo_Light" = "سیلیۆ ڕوناکی";
+"Sileo_Dark" = "سیلیۆ تاریک";
+"Sileo_Adaptive" = "سیلیۆ گونجاوە";
+"System" = "سیستەم";
+"Theme_Settings" = "ڕێکخستنەکانی ڕوکار";
+
+"Manage_Themes" = "بەڕێوەبردنی ڕوکارەکان";
+"Create_Theme" = "دروستکردنی ڕوکار";
+"Import_Themes" = "هاوردەکردنی ڕوکارەکان";
+"Theme_Name" = "ناوی ڕوکار";
+"Export_Themes" = "هەناردەی ڕوکارەکان";
+
+"Background_Color" = "ڕەنگی پشت شاشە";
+"Secondary_Background_Color" = "ڕەنگی دووەمی پشت شاشە";
+"Label_Color" = "ڕەنگی نازناو";
+"Highlight_Color" = "بەرزترین ڕەنگ";
+"Seperator_Color" = "ڕەنگی جیاکەرەوە";
+"Header_Color" = "ڕەنگی سەردێڕ";
+"Banner_Color" = "ڕەنگی بانەر";
+
+
+"Cydia_Sign_In" = "چوونە ژوورەوە بۆ فرۆشگای سیدیا";
+"Payment_Provider_Signed_In" = "چۆتە ژوورەوە";
+"Payment_Provider_Signed_In_With_Name" = "وەک %@ چوونەژوورەوە"; // %@ = user's name
+"Payment_Provider_Sign_Out" = "دەرچوون";
+"Payment_Provider_Sign_Out_Confirm.Title" = "دەرچوون لە %@"; // %@ = payment provider name
+"Payment_Provider_Sign_Out_Confirm.Body" = "چیتر ناتوانیت پاکێجە کڕدراوەکانت دابەزێنیت تاوەکو دووبارە دەچیتە ژورەوە.";
+
+"Show_Install_Details" = "نیشاندانی وردەکارییەکان";
+"Hide_Install_Details" = "شاردنەوەی وردەکارییەکان";
+"Open_In_Filza" = "کردنەوە لە filza";
+"Copy_Path" = "لەبەرگرتنەوەی Path";
+
+"After_Install_Relaunch" = "دووبارە کردنەوەی سیلیۆ";
+"After_Install_Respring" = "دووبارەکردنەوەی سپرینگبۆرد";
+"After_Install_Reboot" = "کوژاندنەوەی ئامێرەکە";
+"After_Install_Relaunch_Later" = "دووبارەکردنەوەی سیلیۆ دواتر";
+"After_Install_Respring_Later" = "دووبارەکردنەوەی سپرینگ بۆرد دواتر";
+"After_Install_Reboot_Later" = "کوژاندنەوەی ئامێرەکە دواتر";
+
+"Dangerous_Repo.Title" = "کۆگایەکی مەترسیدار";
+"Dangerous_Repo.Body" = "تۆ هەوڵ دەدەیت کۆگایەک زیاد بکەیت کە ناسراوە بە زیانبەخش بە هۆکاری وەکوو دزەکردن، ناوەڕۆکی نایاسایی، یان بەرنامەی زیانبەخش.\n\nئەو کۆگایانەی کە وەک زیانبەخش نیشانە کراون زۆرجار نەرمەکاڵاکان دابەش دەکەن کە کاریگەری چاوەڕواننەکراویان هەیە، جا چ لە شێوەی پاکێجی پارەداردا بێت بە خۆڕایی یان شتی تر پاکێجە زیانبەخشەکان. ئەمەش دەتوانێت کاریگەری بەردەوامی لەسەر ئامێرەکەت و پاراستنی نهێنی هەبێت، تەنانەت هەندێکجار کاریگەری لەسەر توانای جەیلبرێکت هەبێت. پێشنیار دەکەین کە زۆر وریا بن بۆ ئەوەی لە نەرمەکاڵا زیانبەخشەکان دوور بکەونەوە.";
+"Dangerous_Repo.Continue" = "من مەترسییەکان قبوڵ دەکەم، بەردەوامبوون";
+"Dangerous_Repo.Cancel" = "بمگەڕێنەوە بۆ سەلامەتی";
+"Dangerous_Repo.Last_Chance.Title" = "زیادکردنی کۆگای زیانبەخش?";
+"Dangerous_Repo.Last_Chance.Body" = "کۆگا مەترسیدارەکان دەتوانن کاریگەری وێرانکەریان هەبێت لەسەر توانای بەکارهێنانی ئامێرەکەت یان جەیلبرێک. بە توندی پێشنیار دەکەین کە بگەڕێنەوە بۆ سەلامەتی خۆتان. دڵنیای کە دەتەوێت %@ زیاد بکەیت؟"; // %@ = repo url
+"Dangerous_Repo.Last_Chance.Continue" = "بەردەوامبوون";
+"Dangerous_Repo.Last_Chance.Cancel" = "گەڕانەوە";
+
+// All export-based strings
+"Export" = "هەناردە";
+"Export_Packages" = "حەز دەکەیت لیستی پاکێجەکانت هەناردە بکەیت؟ بەم شێوەیە هەموو ناوی پاکێجەکان و وەشانیەکانیان کۆپی دەکات بۆ کلیپبۆردەکەت.";
+"Export_Sources" = "حەز دەکەیت لیستی سەرچاوەکانت هەناردە بکەیت؟ بەم شێوەیە هەموو URL سەرچاوەییەکان کۆپی دەکات بۆ کلیپبۆردەکەت.";
+"Export_Yes" = "بەڵێ، لەبەرگرتنەوە.";
+"Export_No" = "نەخێر، گەڕانەوە.";
+
+// Depcitions
+"View_Depiction" = "بینینی وەسف";
+
+"Copy_ID" = "لەبەرگرتنەوەی ID";
+"Canister_Policy" = "Canister Privacy Policy";
+"Download_Analytics" = "Download Analytics";
+"Provided_Canister" = "Provided by Canister";
+"Data_Collected" = "Data collected is used to update the featured page and various recommendation sources.";
+"Change_Later" = "You can always change your choice later.";
+"Whats_Collected" = "What's Collected";
+"Non_Identifying" = "Only package and non-identifying device information is collected.";
+"Privacy_Policy" = "Privacy Policy";

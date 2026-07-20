@@ -1,0 +1,246 @@
+/* 
+  Localizable.strings
+  Sileo
+
+  Created by AppleBetas on 2018-12-27.
+  Copyright © 2018 CoolStar. All rights reserved.
+ 
+ LOCALISATIONS
+*/
+// Common Prompts
+
+"About" = "詳細";
+"Close" = "閉じる";
+"Double tap to open." = "ダブルタップして開く";
+"Untitled_Repo" = "無名のリポジトリ";
+"OK" = "OK";
+"Done" = "完了";
+"Done_Editing" = "完了";
+"More_Info" = "詳細";
+"Loading" = "読み込み中...";
+"Share" = "共有";
+"Delete" = "削除";
+"Cancel" = "キャンセル";
+"Acknowledge" = "承認";
+"Remove" = "削除";
+"Sileo_Team" = "Sileoチーム";
+"Warning" = "警告";
+"Edit" = "編集";
+"Why" = "Why";
+"Deny" = "Deny";
+"Accept" = "Accept";
+
+// Popup messages
+"Background_App_Refresh" = "Appのバックグラウンド更新";
+"Background_App_Refresh_Message" = "最適で最速な体験を得るには、Appのバックグラウンド更新を有効にすることをお勧めします。tweakがアップデート可能になったときに通知を受け取ることができます。";
+"Upgrade_All_Shortcut_Processing_Message" = "リポジトリの更新とパッケージのアップデートを行っています...";
+
+// Statuses for queued/downloading packages. Shown under their name in the queue/status popup.
+"Installing_Package_Status" = "インストール中";
+"Downloading_Package_Status" = "ダウンロード中";
+"Queued_Package_Status" = "キューされています";
+"Ready_Status" = "準備完了";
+"Removal_Queued_Package_Status" = "削除するためにキューされています";
+"Download_Starting" = "開始中…";
+"Download_Progress" = "%@ \\/ %@"; // first %@ = amount downloaded, second %@ = total to download
+
+"Essential_Warning" = "次のパッケージは必須パッケージとされています。: %@\n これらを削除すると、デバイスに不可逆的なエラーが生じ、復元が必要になる場合があります。自分が何をしているかを確実に理解している場合にのみ続行してください。";
+
+"Queue_Confirm_Button" = "実行";
+"Queue_Clear_Button" = "キューをクリア";
+"Queue_Cancel_Downloads" = "ダウンロードをキャンセル";
+
+"Package_Upgrade_Action" = "アップデート";
+"Package_Reinstall_Action" = "再インストール";
+"Package_Uninstall_Action" = "アンインストール";
+"Package_Modify_Action" = "変更";
+"Package_Get_Action" = "入手";
+"Package_Queue_Action" = "キュー";
+"Package_Cancel_Action" = "キャンセル";
+"Package_Paid" = "有料";
+
+"Package_Share_Action" = "パッケージを共有...";
+"Package_Developer_Find_Action" = "この開発者のパッケージ一覧";
+"Package_Support_Action" = "サポート";
+"Package_Hold_Enable_Action" = "アップデートを非表示";
+"Package_Hold_Disable_Action" = "アップデートを表示";
+"Package_Wishlist_Add" = "ほしいものリストに追加";
+"Package_Wishlist_Remove" = "ほしいものリストから削除";
+"Wishlist" = "ほしいものリスト";
+
+"No_New_Packages" = "新しいパッケージはありません";
+"News_Check_Later" = "インデックスが作成された新しいパッケージはまだありません。一定時間が経過し、リポジトリが更新されるとパッケージがここに表示されます。";
+
+// Headings for sections in the queue/status popup.
+"Queued_Install_Heading" = "インストール";
+"Queued_Uninstall_Heading" = "アンインストール";
+"Queued_Update_Heading" = "アップデート";
+"Download_Errors_Heading" = "エラー";
+
+"Installed_Heading" = "インストール済み";
+"Updates_Heading" = "アップデート";
+"Upgrade_All_Button" = "全てをアップデート";
+"Package_Search.Placeholder" = "パッケージを検索";
+"Sort_Name" = "名前";
+"Sort_Date" = "更新日時";
+"Sort_Install_Size" = "インストール済みファイルサイズ";
+"Sort_By" = "並べ替え:";
+
+"Package_Unavailable" = "パッケージを利用できません";
+"Package_By_Author" = "%@ 開発者: %@"; // first %@ = package name, second %@ = author name
+"By_Author" = "開発者: %@"; // %@ = author name
+"Packages_By_Author" = "%@ のパッケージ"; // %@ = author name
+
+"Featured_Page" = "おすすめ";
+"News_Page" = "ニュース";
+"Sources_Page" = "リポジトリ";
+"Packages_Page" = "パッケージ";
+"Search_Page" = "検索";
+"Search_History" = "Recently Searched";
+"Clear_Search_History" = "Clear";
+"Refreshing_Sources_Page" = "リポジトリを更新中";
+"Package_Installed_Files_Page" = "インストール済みファイル";
+"Refresh" = "更新";
+"Remove" = "Remove";
+
+"All_Packages.Title" = "全てのパッケージ";
+"All_Packages.Cell_Subtitle" = "すべてのパッケージを表示";
+
+"All_Categories" = "全てのカテゴリー";
+"Internal_Repo" = "内部リポジトリ";
+"External_Repo" = "外部リポジトリ";
+"Ignored Updates" = "アップデートを無視";
+
+"Repos" = "リポジトリ";
+"Repo" = "リポジトリ";
+
+"Add_Source.Title" = "リポジトリを追加";
+"Add_Source.Body" = "リポジトリの URL を入力";
+"Add_Source.Button.Add" = "追加";
+"Add_Dist_Repo" = "Distリポジトリを追加";
+"Incorrect_Repo" = "%@は有効なリポジトリではないようです。リポジトリがオフラインであるか、間違って入力した可能性があります。追加しますか？";
+
+"Auto_Add_Pasteboard_Sources.Button.Manual" = "手動で入力";
+
+"Untitled_Form" = "無題のフォーム";
+"Form_Submitted.Default_Title" = "送信したフォーム";
+"Form_Submitted.Default_Body" = "フォームの送信に成功しました。";
+
+"Web_Depiction_Deprecated_Warning" = "詳細ページのデータが非推奨の形式です。リポジトリの管理者に連絡してください。";
+
+"Package_Details_Tab" = "詳細";
+"Package_Changelog_Tab" = "更新履歴";
+"Package_No_Description_Available" = "このパッケージでは詳細の表示ができません。";
+"Package_Changelogs_Unavailable" = "このパッケージでは更新履歴を表示できません";
+
+"Installed_Package_Header" = "インストール済み";
+"Installed_Packages" = "インストール済み";
+"Version" = "バージョン";
+"Show_Package_Contents_Button" = "パッケージの内容を表示";
+
+"Licenses_Page_Title" = "ライセンス";
+"Alternate_Icon_Title" = "代替アイコン";
+
+"Settings_Payment_Provider_Heading" = "決済サービスプロバイダー";
+"Settings_Translations_Heading" = "翻訳";
+
+"Settings_Payment_Provider.Purchases_Heading" = "購入済み";
+"Settings_Payment_Provider.No_Purchases" = "購入したパッケージはありません。";
+"Authenticate_To_Purchase" = "購入を完了するため、認証を行ってください";
+
+"Settings" = "設定";
+"Settings_Page_Title" = "設定";
+"Dark_Mode_Toggle" = "ダークモード";
+"Theme" = "テーマ";
+"Tint_Color" = "色合い";
+"Reset_Tint_Color" = "色合いをリセット";
+"Auto_Complete_Queue" = "オートコンプリートキュー";
+"Show_Search_History" = "Show Search History";
+"Auto_Confirm_Upgrade_All_Shortcut" = "すべてのアップデートを自動的に実行する3D touch ショートカット";
+"Swipe_Actions" = "スワイプアクション";
+"Show_Provisional" = "Canisterからのパッケージを表示";
+"Show_Ignored_Updates" = "無視したアップデートを表示";
+"Developer_Mode" = "開発者モード";
+"Pog_Developer" = "開発者モードに切り替わりました！";
+"Developer_Mode_Explain" = "開発者モードは、支払い時のAPIのHTTPS要件を無効にします。";
+"Auto_Refresh_Sources" = "リポジトリを自動で更新";
+"iCloud_Profile" = "おすすめページにiCloudプロフィール画像を表示";
+"Cache_Size" = "キャッシュサイズ";
+"Clear_Cache" = "ネットワークのキャッシュをクリア";
+"Clear_Cache_Message" = "ネットワークのキャッシュをクリアしますか？これにより%@の容量を解放します。";
+"Language" = "言語";
+"Use_System_Language" = "システム言語を使用";
+"Apply_Changes" = "変更を保存";
+"Apply_Changes_Confirm" = "変更を保存するには、Sileoを再起動する必要があります。";
+"Help_Translate" = "Sileoの翻訳を助ける";
+"Always_Show_Install_Log" = "インストールのログを常に表示する";
+"Auto_Show_Queue" = "すべてのアップデートを表示";
+
+"Sileo_Light" = "ライト";
+"Sileo_Dark" = "ダーク";
+"Sileo_Adaptive" = "自動";
+"System" = "システム";
+"Theme_Settings" = "テーマの設定";
+
+"Manage_Themes" = "Manage Themes";
+"Create_Theme" = "Create Theme";
+"Import_Themes" = "Import Themes";
+"Theme_Name" = "Theme name";
+"Export_Themes" = "Export Themes";
+
+"Background_Color" = "Background Color";
+"Secondary_Background_Color" = "Secondary Background Color";
+"Label_Color" = "Label Color";
+"Highlight_Color" = "Highlight Color";
+"Seperator_Color" = "Seperator Color";
+"Header_Color" = "Header Color";
+"Banner_Color" = "Banner Color";
+
+
+"Cydia_Sign_In" = "Cydia Store へサインイン";
+"Payment_Provider_Signed_In" = "サインイン";
+"Payment_Provider_Signed_In_With_Name" = "%@ としてサインイン中"; // %@ = user's name
+"Payment_Provider_Sign_Out" = "サインアウト";
+"Payment_Provider_Sign_Out_Confirm.Title" = "%@ からサインアウト"; // %@ = payment provider name
+"Payment_Provider_Sign_Out_Confirm.Body" = "次回のサインインまで、購入したパッケージがダウンロード出来なくなります。";
+
+"Show_Install_Details" = "詳細を表示";
+"Hide_Install_Details" = "詳細を非表示";
+"Open_In_Filza" = "Filzaで開く";
+"Copy_Path" = "パスをコピー";
+
+"After_Install_Relaunch" = "Sileo を再起動";
+"After_Install_Respring" = "SpringBoard を再起動";
+"After_Install_Reboot" = "再起動";
+"After_Install_Relaunch_Later" = "後でSileo を再起動";
+"After_Install_Respring_Later" = "後でSpringBoard を再起動";
+"After_Install_Reboot_Later" = "後でデバイスを再起動";
+
+"Dangerous_Repo.Title" = "危険なリポジトリ";
+"Dangerous_Repo.Body" = "著作権の侵害・違法なコンテンツ・マルウェア等の理由で有害であると認識されているリポジトリを追加しようとされています。\n\n有害なリポジトリでは、本来有償のソフトウェアを無償として配布したり、予期しない影響を与えるソフトウェアを配布している場合があります。一度、悪意のあるソフトウェアをインストールしてしまうと、デバイスとプライバシーに永続的な影響を与える可能性があり、Jailbreak 状態の維持にも影響を与えることがあります。有害なソフトウェアを回避するために細心の注意を払うことを強く推奨します。";
+"Dangerous_Repo.Continue" = "私はリスクを受け入れ、追加します";
+"Dangerous_Repo.Cancel" = "安全性を確保する";
+"Dangerous_Repo.Last_Chance.Title" = "有害なリポジトリを追加しますか？";
+"Dangerous_Repo.Last_Chance.Body" = "危険なリポジトリの追加によって、お使いのデバイスを破損させる恐れがあります。安全性を確保するためにも、登録しないことを強く推奨します。"; // %@ = repo url
+"Dangerous_Repo.Last_Chance.Continue" = "続ける";
+"Dangerous_Repo.Last_Chance.Cancel" = "戻る";
+
+// All export-based strings
+"Export" = "エクスポート";
+"Export_Packages" = "パッケージリストをエクスポートしますか？ これにより、すべてのパッケージ名とそのバージョンがクリップボードにコピーされます。";
+"Export_Sources" = "リポジトリリストをエクスポートしますか？ これにより、すべてのリポジトリ URL がクリップボードにコピーされます。";
+"Export_Yes" = "はい";
+"Export_No" = "キャンセル";
+
+// Depcitions
+"View_Depiction" = "詳細を見る";
+
+"Copy_ID" = "Copy ID";
+"Canister_Policy" = "Canister Privacy Policy";
+"Download_Analytics" = "Download Analytics";
+"Provided_Canister" = "Provided by Canister";
+"Data_Collected" = "Data collected is used to update the featured page and various recommendation sources.";
+"Change_Later" = "You can always change your choice later.";
+"Whats_Collected" = "What's Collected";
+"Non_Identifying" = "Only package and non-identifying device information is collected.";
+"Privacy_Policy" = "Privacy Policy";

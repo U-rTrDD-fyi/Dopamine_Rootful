@@ -1,0 +1,115 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Alderis",
+        "repositoryURL": "https://github.com/elihwyma/Alderis.git",
+        "state": {
+          "branch": "master",
+          "revision": "95030bfc6afc5d58a22aaa013e0f4c77317b57a1",
+          "version": null
+        }
+      },
+      {
+        "package": "Cosmos",
+        "repositoryURL": "https://github.com/evgenyneu/Cosmos.git",
+        "state": {
+          "branch": null,
+          "revision": "cce521e734d0090494bd4afab5fd2e2f2465c1af",
+          "version": "23.0.0"
+        }
+      },
+      {
+        "package": "Down",
+        "repositoryURL": "https://github.com/johnxnguyen/Down.git",
+        "state": {
+          "branch": null,
+          "revision": "f34b166be1f1db4aa8f573067e901d72f2a6be57",
+          "version": "0.11.0"
+        }
+      },
+      {
+        "package": "Evander",
+        "repositoryURL": "https://github.com/elihwyma/Evander",
+        "state": {
+          "branch": null,
+          "revision": "0059e74d91e8574bee454e748ea6cc188e8b43db",
+          "version": null
+        }
+      },
+      {
+        "package": "JJLISO8601DateFormatter",
+        "repositoryURL": "https://github.com/michaeleisel/JJLISO8601DateFormatter",
+        "state": {
+          "branch": null,
+          "revision": "741a9e45db01148a8ac60c5e12f7c978181a22d3",
+          "version": "0.1.8"
+        }
+      },
+      {
+        "package": "LNPopupController",
+        "repositoryURL": "https://github.com/elihwyma/LNPopupController",
+        "state": {
+          "branch": null,
+          "revision": "6cdb4a977b8e0253305cd5009e33028d90631788",
+          "version": null
+        }
+      },
+      {
+        "package": "LNZTreeView",
+        "repositoryURL": "https://github.com/elihwyma/LNZTreeView",
+        "state": {
+          "branch": "master",
+          "revision": "bb7f9b77989e1c07460319e7bd4d1fcbf7cb26ae",
+          "version": null
+        }
+      },
+      {
+        "package": "Onboarding",
+        "repositoryURL": "https://github.com/elihwyma/Onboarding",
+        "state": {
+          "branch": null,
+          "revision": "0cc79de9709878187d942d22a64dfd4c2c55a528",
+          "version": "1.0.2"
+        }
+      },
+      {
+        "package": "SQLite.swift",
+        "repositoryURL": "https://github.com/stephencelis/SQLite.swift.git",
+        "state": {
+          "branch": null,
+          "revision": "a95fc6df17d108bd99210db5e8a9bac90fe984b8",
+          "version": "0.15.3"
+        }
+      },
+      {
+        "package": "SwipeCellKit",
+        "repositoryURL": "https://github.com/SwipeCellKit/SwipeCellKit.git",
+        "state": {
+          "branch": null,
+          "revision": "7219cad3098637176ace311510d11467dbfb9bb0",
+          "version": "2.7.1"
+        }
+      },
+      {
+        "package": "ZippyJSON",
+        "repositoryURL": "https://github.com/michaeleisel/ZippyJSON.git",
+        "state": {
+          "branch": null,
+          "revision": "ddbbc024ba5a826f9676035a0a090a0bc2d40755",
+          "version": "1.2.15"
+        }
+      },
+      {
+        "package": "ZippyJSONCFamily",
+        "repositoryURL": "https://github.com/michaeleisel/ZippyJSONCFamily",
+        "state": {
+          "branch": null,
+          "revision": "c1c0f88977359ea85b81e128b2d988e8250dfdae",
+          "version": "1.2.14"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

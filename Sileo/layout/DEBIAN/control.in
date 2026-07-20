@@ -1,0 +1,11 @@
+Package: @@PACKAGE_ID@@
+Name: @@PACKAGE_NAME@@
+Version: @@MARKETING_VERSION@@
+Author: Amy While <me@anamy.gay>
+Maintainer: Amy While <me@anamy.gay>
+Description: A modern APT package manager frontend
+Architecture: @@DEB_ARCH@@
+Depends: @@DEB_DEPENDS@@
+Section: Packaging
+Icon: @@ICON@@
+SileoDepiction: https://featuredpage.getsileo.app/depiction.json

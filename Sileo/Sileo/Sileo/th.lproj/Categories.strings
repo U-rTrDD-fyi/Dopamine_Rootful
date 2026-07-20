@@ -1,0 +1,21 @@
+/* 
+  Categories.strings
+  Sileo
+
+  Created by AppleBetas on 2018-12-28.
+  Copyright © 2018 CoolStar. All rights reserved.
+ 
+ LOCALISATIONS
+*/
+
+"No_Category" = "อื่นๆ";
+"Tweaks" = "ทวีค";
+"Themes" = "ธีม";
+"Utilities" = "ยูทิลิตี้";
+"Applications" = "แอพพลิเคชั่น";
+"Addons" = "ส่วนเสริม";
+"Games" = "เกมส์";
+"Developer" = "ผู้พัฒนา";
+"Data_Storage" = "หน่วยจัดเก็บข้อมูล";
+"Terminal_Support" = "การสนับสนุนเทอร์มินัล";
+"Text_Editors" = "ตัวแก้ไขข้อความ";

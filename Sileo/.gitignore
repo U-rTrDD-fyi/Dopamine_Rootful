@@ -1,0 +1,11 @@
+.DS_Store
+
+/Sileo.xcodeproj/xcuserdata/
+/Sileo.xcodeproj/project.xcworkspace/xcuserdata/
+/build/
+/.vscode/
+/.idea/
+/.theos/
+
+/giveMeRoot/bin/
+/packages/

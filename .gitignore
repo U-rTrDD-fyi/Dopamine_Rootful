@@ -13,3 +13,16 @@ Tools/fastPathSign/.build_*
 Exploits/kfd/kfd.framework/kfd
 readme_rootful.md
 push.sh
+
+# Local scratch: large screen recordings etc., not worth versioning
+misc/
+
+# The vendored Sileo tree must keep its shared scheme and SwiftPM pins, which
+# the blanket xcshareddata/ rule above would otherwise drop. `make package`
+# runs `xcodebuild -scheme Sileo`, so without the scheme the build fails on a
+# fresh clone, and without Package.resolved the dependencies are unpinned.
+!Sileo/**/xcshareddata/
+!Sileo/**/xcshareddata/**
+# Build outputs of the vendored tree
+Sileo/packages/
+Sileo/giveMeRoot/bin/

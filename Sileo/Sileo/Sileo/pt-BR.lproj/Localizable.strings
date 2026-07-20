@@ -1,0 +1,246 @@
+/* 
+  Localizable.strings
+  Sileo
+
+  Created by AppleBetas on 2018-12-27.
+  Copyright © 2018 CoolStar. All rights reserved.
+ 
+ LOCALISATIONS
+*/
+// Common Prompts
+
+"About" = "Sobre";
+"Close" = "Fechar";
+"Double tap to open." = "Toque duas vezes para abrir.";
+"Untitled_Repo" = "Repo sem título";
+"OK" = "Ok";
+"Done" = "Concluído";
+"Done_Editing" = "Concluído";
+"More_Info" = "Mais Informações";
+"Loading" = "Carregando…";
+"Share" = "Compartilhar";
+"Delete" = "Apagar";
+"Cancel" = "Cancelar";
+"Acknowledge" = "Reconhecer";
+"Remove" = "Remover";
+"Sileo_Team" = "Equipe Sileo";
+"Warning" = "Aviso";
+"Edit" = "Editar";
+"Why" = "Why";
+"Deny" = "Deny";
+"Accept" = "Accept";
+
+// Popup messages
+"Background_App_Refresh" = "Atualização do aplicativo em segundo plano";
+"Background_App_Refresh_Message" = "Para obter a melhor e mais rápida experiência, é recomendável habilitar a atualização do aplicativo em segundo plano. Você também pode receber notificações quando seus tweaks forem atualizados!";
+"Upgrade_All_Shortcut_Processing_Message" = "Atualizando todas as fontes e pacotes...";
+
+// Statuses for queued/downloading packages. Shown under their name in the queue/status popup.
+"Installing_Package_Status" = "Instalando";
+"Downloading_Package_Status" = "Baixando";
+"Queued_Package_Status" = "Na fila";
+"Ready_Status" = "Preparar";
+"Removal_Queued_Package_Status" = "Na fila para remoção";
+"Download_Starting" = "Iniciando…";
+"Download_Progress" = "%@ de %@"; // first %@ = amount downloaded, second %@ = total to download
+
+"Essential_Warning" = "Os seguintes pacotes são listados como essenciais/obrigatórios: %@\n Removê-los pode causar danos irreversíveis ao seu dispositivo e pode exigir a restauração. Continue apenas se tiver certeza de que sabe o que está fazendo.";
+
+"Queue_Confirm_Button" = "Confirmar";
+"Queue_Clear_Button" = "Limpar fila";
+"Queue_Cancel_Downloads" = "Cancelar downloads";
+
+"Package_Upgrade_Action" = "Atualizar";
+"Package_Reinstall_Action" = "Reinstalar";
+"Package_Uninstall_Action" = "Desinstalar";
+"Package_Modify_Action" = "Modificar";
+"Package_Get_Action" = "Obter";
+"Package_Queue_Action" = "Fila";
+"Package_Cancel_Action" = "Cancelar";
+"Package_Paid" = "Pago";
+
+"Package_Share_Action" = "Compartilhar pacote…";
+"Package_Developer_Find_Action" = "Mais deste desenvolvedor";
+"Package_Support_Action" = "Suporte";
+"Package_Hold_Enable_Action" = "Ignorar atualizações futuras";
+"Package_Hold_Disable_Action" = "Parar de ignorar atualizações";
+"Package_Wishlist_Add" = "Adicionar à lista de desejos";
+"Package_Wishlist_Remove" = "Remover da lista de desejos";
+"Wishlist" = "Lista de desejos";
+
+"No_New_Packages" = "Sem novos pacotes";
+"News_Check_Later" = "Não há novos pacotes indexados ainda. Volte em algumas horas e você verá os pacotes começarem a aparecer aqui conforme os repositórios são atualizados.";
+
+// Headings for sections in the queue/status popup.
+"Queued_Install_Heading" = "Instalar";
+"Queued_Uninstall_Heading" = "Desinstalar";
+"Queued_Update_Heading" = "Atualizar";
+"Download_Errors_Heading" = "Erros";
+
+"Installed_Heading" = "Instalado";
+"Updates_Heading" = "Atualizações";
+"Upgrade_All_Button" = "Atualizar tudo";
+"Package_Search.Placeholder" = "Procurar por Pacotes";
+"Sort_Name" = "Nome";
+"Sort_Date" = "Data";
+"Sort_Install_Size" = "Tamanho Instalado";
+"Sort_By" = "Ordenar por:";
+
+"Package_Unavailable" = "Pacote indisponível";
+"Package_By_Author" = "%@ por %@"; // first %@ = package name, second %@ = author name
+"By_Author" = "por %@"; // %@ = author name
+"Packages_By_Author" = "Pacotes por %@"; // %@ = author name
+
+"Featured_Page" = "Em Destaque";
+"News_Page" = "Novidades";
+"Sources_Page" = "Fontes";
+"Packages_Page" = "Pacotes";
+"Search_Page" = "Procurar";
+"Search_History" = "Recently Searched";
+"Clear_Search_History" = "Clear";
+"Refreshing_Sources_Page" = "Atualizando Fontes";
+"Package_Installed_Files_Page" = "Arquivos instalados";
+"Refresh" = "Atualizar";
+"Remove" = "Remove";
+
+"All_Packages.Title" = "Todos os pacotes";
+"All_Packages.Cell_Subtitle" = "Ver todos os pacotes das suas fontes";
+
+"All_Categories" = "Todas as categorias";
+"Internal_Repo" = "Repos Internas";
+"External_Repo" = "Repos externas";
+"Ignored Updates" = "Atualizações Ignoradas";
+
+"Repos" = "Repositorios";
+"Repo" = "Repositório";
+
+"Add_Source.Title" = "Adicionar Fonte";
+"Add_Source.Body" = "Adicionar URL APT";
+"Add_Source.Button.Add" = "Adicionar Fonte";
+"Add_Dist_Repo" = "Adicionar Dist Repo";
+"Incorrect_Repo" = "%@ não parece ser um repositório válido. O repositório pode estar offline ou você pode tê-lo inserido incorretamente. Quer adicionar mesmo assim?";
+
+"Auto_Add_Pasteboard_Sources.Button.Manual" = "Inserir Manualmente";
+
+"Untitled_Form" = "Formulário sem título";
+"Form_Submitted.Default_Title" = "Formulário submetido";
+"Form_Submitted.Default_Body" = "Formulário submetido com sucesso.";
+
+"Web_Depiction_Deprecated_Warning" = "As representações do Web View estão obsoletas. Entre em contato com o mantenedor da repo sobre a atualização para versões nativas.";
+
+"Package_Details_Tab" = "Detalhes";
+"Package_Changelog_Tab" = "Mudanças";
+"Package_No_Description_Available" = "Nenhuma descrição disponível para este pacote.";
+"Package_Changelogs_Unavailable" = "Registo de Mudanças não disponível para este pacote.";
+
+"Installed_Package_Header" = "Pacote instalado";
+"Installed_Packages" = "Pacotes Instalados";
+"Version" = "Versão";
+"Show_Package_Contents_Button" = "Mostrar conteúdo do pacote";
+
+"Licenses_Page_Title" = "Licenças";
+"Alternate_Icon_Title" = "Ícones Alternativos";
+
+"Settings_Payment_Provider_Heading" = "Provedores de pagamento";
+"Settings_Translations_Heading" = "Traduções";
+
+"Settings_Payment_Provider.Purchases_Heading" = "Compras";
+"Settings_Payment_Provider.No_Purchases" = "Sem compras";
+"Authenticate_To_Purchase" = "Authenticate to complete your purchase";
+
+"Settings" = "Configurações";
+"Settings_Page_Title" = "Configurações";
+"Dark_Mode_Toggle" = "Modo escuro";
+"Theme" = "Tema";
+"Tint_Color" = "Tom das cores";
+"Reset_Tint_Color" = "Redefinir cores";
+"Auto_Complete_Queue" = "Completar fila automaticamente";
+"Show_Search_History" = "Show Search History";
+"Auto_Confirm_Upgrade_All_Shortcut" = "Confirmação automática de atualização de todos os atalhos";
+"Swipe_Actions" = "Ações ao deslizar";
+"Show_Provisional" = "Mostrar pacotes do Canister";
+"Show_Ignored_Updates" = "Mostrar atualizações ignoradas";
+"Developer_Mode" = "Modo de desenvolvedor";
+"Pog_Developer" = "Agora você é um desenvolvedor!";
+"Developer_Mode_Explain" = "O modo de desenvolvedor desativa o requisito HTTPS da API de pagamento.";
+"Auto_Refresh_Sources" = "Atualizar fontes automaticamente";
+"iCloud_Profile" = "Mostrar imagem do iCloud no Destaque";
+"Cache_Size" = "Tamanho do cache";
+"Clear_Cache" = "Limpar cache da rede";
+"Clear_Cache_Message" = "Você deseja limpar o cache da rede? Isso vai liberar %@";
+"Language" = "Linguagem";
+"Use_System_Language" = "Use a linguagem do sistema";
+"Apply_Changes" = "Aplicar mudanças";
+"Apply_Changes_Confirm" = "A aplicação de alterações exigirá a reinicialização do Sileo";
+"Help_Translate" = "Ajude a traduzir Sileo";
+"Always_Show_Install_Log" = "Sempre mostrar o log de instalação";
+"Auto_Show_Queue" = "Mostrar fila ao atualizar tudo";
+
+"Sileo_Light" = "Sileo Claro";
+"Sileo_Dark" = "Sileo Escuro";
+"Sileo_Adaptive" = "Sileo Adaptativo";
+"System" = "Sistema";
+"Theme_Settings" = "Configurações de tema";
+
+"Manage_Themes" = "Manage Themes";
+"Create_Theme" = "Create Theme";
+"Import_Themes" = "Import Themes";
+"Theme_Name" = "Theme name";
+"Export_Themes" = "Export Themes";
+
+"Background_Color" = "Background Color";
+"Secondary_Background_Color" = "Secondary Background Color";
+"Label_Color" = "Label Color";
+"Highlight_Color" = "Highlight Color";
+"Seperator_Color" = "Seperator Color";
+"Header_Color" = "Header Color";
+"Banner_Color" = "Banner Color";
+
+
+"Cydia_Sign_In" = "Entrar na loja da Cydia";
+"Payment_Provider_Signed_In" = "Sessão iniciada";
+"Payment_Provider_Signed_In_With_Name" = "Sessão iniciada como %@"; // %@ = user's name
+"Payment_Provider_Sign_Out" = "Terminar sessão";
+"Payment_Provider_Sign_Out_Confirm.Title" = "Terminar sessão de %@"; // %@ = payment provider name
+"Payment_Provider_Sign_Out_Confirm.Body" = "Você não poderá mais baixar seus pacotes comprados até que faça login novamente.";
+
+"Show_Install_Details" = "Mais Detalhes";
+"Hide_Install_Details" = "Esconder Detalhes";
+"Open_In_Filza" = "Abrir no Filza";
+"Copy_Path" = "Copiar caminho";
+
+"After_Install_Relaunch" = "Reiniciar Sileo";
+"After_Install_Respring" = "Reiniciar SpringBoard";
+"After_Install_Reboot" = "Reiniciar Dispositivo";
+"After_Install_Relaunch_Later" = "Reiniciar Sileo depois";
+"After_Install_Respring_Later" = "Reiniciar SpringBoard depois";
+"After_Install_Reboot_Later" = "Reiniciar dispositivo depois";
+
+"Dangerous_Repo.Title" = "Repo Perigosa";
+"Dangerous_Repo.Body" = "Você está tentando adicionar um repositório que é conhecido por ser prejudicial por motivos como pirataria, conteúdo ilegal ou malware. \n\n Repositórios marcados como prejudiciais geralmente distribuem software com efeitos inesperados, seja na forma de pacotes pagos gratuitamente ou outros pacotes maliciosos. Isso pode ter efeitos duradouros em seu dispositivo e privacidade, às vezes afetando sua capacidade de fazer o jailbreak. Recomendamos que você tenha muito cuidado para evitar softwares prejudiciais.";
+"Dangerous_Repo.Continue" = "Aceito os riscos, continuar";
+"Dangerous_Repo.Cancel" = "Levar-me de volta em segurança";
+"Dangerous_Repo.Last_Chance.Title" = "Adicionar repo nociva?";
+"Dangerous_Repo.Last_Chance.Body" = "Repositórios perigosos podem ter efeitos devastadores em sua capacidade de usar seu dispositivo ou fazer o jailbreak. Recomendamos que você volte para sua própria segurança. Tem certeza que deseja adicionar %@?"; // %@ = repo url
+"Dangerous_Repo.Last_Chance.Continue" = "Continuar";
+"Dangerous_Repo.Last_Chance.Cancel" = "Volte";
+
+// All export-based strings
+"Export" = "Exportar";
+"Export_Packages" = "Gostaria de exportar a sua lista de pacotes? Isto irá copiar todos os nomes de pacotes e as suas versões para a sua área de transferência.";
+"Export_Sources" = "Gostaria de exportar a sua lista de fontes? Isto irá copiar todos os URLs de fontes para a sua área de transferência.";
+"Export_Yes" = "Sim, copiar.";
+"Export_No" = "Não, cancelar.";
+
+// Depcitions
+"View_Depiction" = "Ver Descrição";
+
+"Copy_ID" = "Copy ID";
+"Canister_Policy" = "Canister Privacy Policy";
+"Download_Analytics" = "Download Analytics";
+"Provided_Canister" = "Provided by Canister";
+"Data_Collected" = "Data collected is used to update the featured page and various recommendation sources.";
+"Change_Later" = "You can always change your choice later.";
+"Whats_Collected" = "What's Collected";
+"Non_Identifying" = "Only package and non-identifying device information is collected.";
+"Privacy_Policy" = "Privacy Policy";

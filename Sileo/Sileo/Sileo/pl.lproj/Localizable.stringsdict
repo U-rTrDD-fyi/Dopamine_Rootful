@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>Auto_Add_Pasteboard_Sources.Title</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>Automatycznie Dodaj %#@sources@</string>
+      <key>sources</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>lu</string>
+        <key>one</key>
+        <string>Źródło</string>
+        <key>few</key>
+        <string>Źródła</string>
+        <key>many</key>
+        <string>Źródła</string>
+        <key>other</key>
+        <string>Źródła</string>
+      </dict>
+    </dict>
+    <key>Auto_Add_Pasteboard_Sources.Button.Add</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>Dodaj %lu %#@sources@</string>
+      <key>sources</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>lu</string>
+        <key>one</key>
+        <string>Źródło</string>
+        <key>few</key>
+        <string>Źródła</string>
+        <key>many</key>
+        <string>Źródła</string>
+        <key>other</key>
+        <string>Źródła</string>
+      </dict>
+    </dict>
+    <key>Auto_Add_Pasteboard_Sources.Body_Intro</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>Dodaj te źródła %#@urls@ znalezione w Twoim schowku:</string>
+      <key>urls</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>lu</string>
+        <key>one</key>
+        <string>Adres URL</string>
+        <key>few</key>
+        <string>Adresy URL</string>
+        <key>many</key>
+        <string>Adresy URL</string>
+        <key>other</key>
+        <string>Adresy URL</string>
+      </dict>
+    </dict>
+    <key>Package_Queue_Count</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>%#@packages@</string>
+      <key>packages</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>one</key>
+        <string>%d Pakiet</string>
+        <key>few</key>
+        <string>%d Pakiety</string>
+        <key>many</key>
+        <string>%d Pakietów</string>
+        <key>other</key>
+        <string>%d Pakietów</string>
+      </dict>
+    </dict>
+  </dict>
+</plist>
