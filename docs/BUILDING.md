@@ -174,7 +174,7 @@ onto every nested framework (inert on iOS, but not what upstream produces).
 ### 4.4 Runtime: "Install package manager" does nothing / Sileo never appears
 
 Not a build error — the app compiled and jailbroke fine, but tapping **Install
-package manager** (or picking one on first jailbreak) never installed Sileo/Zebra.
+package manager** (or picking one on first jailbreak) never installed anything.
 Cause: `Application/Dopamine/Jailbreak/DOBootstrapper.m -installPackage:` had its
 entire body **commented out** and just `return 0;` — so `installPackageManagers`
 looped over the enabled managers and "succeeded" without ever running `dpkg`.
@@ -189,11 +189,16 @@ looped over the enabled managers and "succeeded" without ever running `dpkg`.
 }
 ```
 `reinstallPackageManagers` wraps this in `runAsRoot` (`setuid(0)`), so the
-`getuid()==0` branch runs `dpkg -i` on the bundled `sileo.deb` / `zebra.deb`
-(shipped in `Application/Dopamine/Resources`, copied into the `.app`). Those debs
-install `Sileo.app`/`Zebra.app` under `/var/jb/Applications/` and their `postinst`
-runs `uicache`, so the icons appear without any extra call. No BaseBin changes
+`getuid()==0` branch runs `dpkg -i` on the bundled `sileo.deb`
+(shipped in `Application/Dopamine/Resources`, copied into the `.app`). The deb
+installs `Sileo.app` under `/var/jb/Applications/` and its `postinst`
+runs `uicache`, so the icon appears without any extra call. No BaseBin changes
 needed — `jbctl internal install_pkg` already implements the non-root path.
+
+> At the time this bug was found, both `sileo.deb` and `zebra.deb` were bundled
+> and the user picked between them on first jailbreak. Only the patched Sileo
+> ships now, and it installs automatically — see
+> [LEGACY-TWEAKS.md](LEGACY-TWEAKS.md).
 
 > Incremental-rebuild gotcha: the `.include` target regenerates `xpc/xpc.h` every
 > run, which bumps its mtime and invalidates cached clang PCMs, giving
