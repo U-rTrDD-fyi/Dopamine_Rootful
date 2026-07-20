@@ -22,6 +22,7 @@ class PackageCollectionViewCell: SwipeCollectionViewCell {
     var numberOfItems: CGFloat = 0
     var alwaysHidesSeparator = false
     var stateBadgeView: PackageStateBadgeView?
+    var architectureBadge: ArchitectureBadgeLabel?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -31,14 +32,41 @@ class PackageCollectionViewCell: SwipeCollectionViewCell {
         super.init(coder: aDecoder)
     }
     
-    /// Both architectures are installable here, but they behave differently -
-    /// rootful packages target / and need patching to load, rootless ones target
-    /// the jbroot. Say which is which rather than leaving it a guess.
-    static func architectureSuffix(for architecture: String?) -> String {
-        switch DPKGArchitecture.Architecture(rawValue: architecture ?? "") {
-        case .rootful: return " • Rootful"
-        case .rootless: return " • Rootless"
-        default: return ""
+    /// Pill showing whether a package is rootful or rootless. Both install here,
+    /// but they behave differently - rootful ones target / and need patching to
+    /// load - so it is worth stating rather than leaving it a guess.
+    final class ArchitectureBadgeLabel: UILabel {
+        private static let insets = UIEdgeInsets(top: 2, left: 6, bottom: 2, right: 6)
+
+        override func drawText(in rect: CGRect) {
+            super.drawText(in: rect.inset(by: Self.insets))
+        }
+
+        override var intrinsicContentSize: CGSize {
+            let size = super.intrinsicContentSize
+            guard !(text ?? "").isEmpty else { return .zero }
+            return CGSize(width: size.width + Self.insets.left + Self.insets.right,
+                          height: size.height + Self.insets.top + Self.insets.bottom)
+        }
+
+        func apply(architecture: String?) {
+            switch DPKGArchitecture.Architecture(rawValue: architecture ?? "") {
+            case .rootful:
+                text = "ROOTFUL"
+                textColor = .systemOrange
+                backgroundColor = UIColor.systemOrange.withAlphaComponent(0.18)
+                isHidden = false
+            case .rootless:
+                text = "ROOTLESS"
+                textColor = .systemTeal
+                backgroundColor = UIColor.systemTeal.withAlphaComponent(0.18)
+                isHidden = false
+            default:
+                // "all" and anything unrecognised: no meaningful distinction.
+                text = nil
+                isHidden = true
+            }
+            invalidateIntrinsicContentSize()
         }
     }
 
@@ -46,7 +74,8 @@ class PackageCollectionViewCell: SwipeCollectionViewCell {
         didSet {
             if let targetPackage = targetPackage {
                 titleLabel?.text = targetPackage.name
-                authorLabel?.text = "\(targetPackage.author?.name ?? "Unknown") • \(targetPackage.version)\(Self.architectureSuffix(for: targetPackage.architecture))"
+                authorLabel?.text = "\(targetPackage.author?.name ?? "Unknown") • \(targetPackage.version)"
+                architectureBadge?.apply(architecture: targetPackage.architecture)
                 descriptionLabel?.text = targetPackage.packageDescription
                 
                 let url = targetPackage.icon
@@ -68,6 +97,7 @@ class PackageCollectionViewCell: SwipeCollectionViewCell {
             if let provisionalTarget = provisionalTarget {
                 titleLabel?.text = provisionalTarget.name ?? ""
                 authorLabel?.text = "\(provisionalTarget.author?.name ?? "") • \(provisionalTarget.version)"
+                architectureBadge?.apply(architecture: nil)
                 descriptionLabel?.text = provisionalTarget.description
             
                 let url = provisionalTarget.icon
@@ -107,6 +137,37 @@ class PackageCollectionViewCell: SwipeCollectionViewCell {
             }
         }
         
+        let badge = ArchitectureBadgeLabel(frame: .zero)
+        badge.translatesAutoresizingMaskIntoConstraints = false
+        badge.font = .systemFont(ofSize: 10, weight: .semibold)
+        badge.textAlignment = .center
+        badge.layer.cornerRadius = 4
+        badge.clipsToBounds = true
+        badge.isHidden = true
+        badge.setContentHuggingPriority(.required, for: .horizontal)
+        badge.setContentCompressionResistancePriority(.required, for: .horizontal)
+        architectureBadge = badge
+        contentView.addSubview(badge)
+
+        if let authorLabel = authorLabel {
+            // Every label in the xib is pinned to the trailing edge, so a badge
+            // placed there would sit on top of the author line. Drop that one
+            // constraint and bound the label against the badge instead. Using an
+            // inequality lets the label keep sizing to its content, and leaves
+            // the layout valid when the badge is hidden (zero intrinsic width).
+            for constraint in contentView.constraints
+            where (constraint.firstItem === authorLabel && constraint.firstAttribute == .trailing)
+               || (constraint.secondItem === authorLabel && constraint.secondAttribute == .trailing) {
+                constraint.isActive = false
+            }
+
+            NSLayoutConstraint.activate([
+                badge.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+                badge.centerYAnchor.constraint(equalTo: authorLabel.centerYAnchor),
+                authorLabel.trailingAnchor.constraint(lessThanOrEqualTo: badge.leadingAnchor, constant: -8)
+            ])
+        }
+
         weak var weakSelf = self
         NotificationCenter.default.addObserver(weakSelf as Any,
                                                selector: #selector(updateSileoColors),

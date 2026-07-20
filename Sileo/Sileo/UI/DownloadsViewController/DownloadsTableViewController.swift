@@ -661,7 +661,12 @@ class DownloadsTableViewController: SileoViewController {
         let header = UIView(frame: CGRect(x: 0, y: 0, width: detailsView.bounds.width, height: Self.detailsHeaderHeight))
         header.tag = headerTag
         header.autoresizingMask = [.flexibleWidth]
-        header.backgroundColor = .clear
+
+        // The log scrolls underneath this bar, so it must be opaque or the text
+        // collides with the title and Copy button. Match whatever the details
+        // view is using rather than hardcoding a colour, so themes still work.
+        header.backgroundColor = detailsView.backgroundColor ?? .sileoBackgroundColor
+        header.isOpaque = true
 
         let title = UILabel(frame: CGRect(x: 16, y: 0, width: detailsView.bounds.width - 90, height: Self.detailsHeaderHeight))
         title.autoresizingMask = [.flexibleWidth]
