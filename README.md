@@ -1,75 +1,145 @@
 <img src="https://github.com/opa334/Dopamine/assets/52459150/ed04dd3e-d879-456d-9aa3-d4ed44819c7e" width="64" />
 
-# Dopamine
+# Dopamine Rootful (AIO)
 
-=== ATTENTION! === <br>
-Before using this repository - go and star original Dopamine because without it this project wouldnt be possible.
+A **rootful** semi-untethered jailbreak for iOS 15, that installs both
+**rootless (`iphoneos-arm64`) and legacy rootful (`iphoneos-arm`) tweaks** from
+the Sileo GUI.
 
-This repo was forked from the commit: [2cfd690ac07d35eef62f42396a9989441a47b768](https://github.com/opa334/Dopamine/commit/2cfd690ac07d35eef62f42396a9989441a47b768) so it includes spinlock fix. No bootlogos at the moment though.
+> **Star [opa334/Dopamine](https://github.com/opa334/Dopamine) first.** None of
+> this exists without it. The rootful groundwork is
+> [ghh-jb](https://github.com/ghh-jb)'s — see [Credits](#credits).
 
-A rootful semi-untethered jailbreak for iOS 15.x (arm64e) and iOS 15.0 - 15.8.6 (arm64). More details will follow here soon.
+---
 
-Please note that all issues related to version support will be deleted without response.<br>
-Please note that all issues related to rootful copy of the original jailbreak should NOT be submitted to original repository, unless they exist even in the unmodified Dopamine jailbreak.<br>
-Please note, that this project is only for the developers and should not be used by an end-user who just wants the easy one-click jailbreak. <br>
-Please note that I, as well as any of the original developers are not responsible for any damage or data loss caused by this tool. So... <br>**USE AT YOUR OWN RISK!**<br>
-Please note, that bootstrapping this version might be harder than original jailbreak.<br>
-Please note, that this project is experimantal and:<br>
-1. Should NEVER be used for malicious purposes (e.g. bypassing iCloud Lock, MDM and other services)
-2. Is dedicated mostly for security researchers who want to see, how does APFS and TMPFS work under the hood.
+## What this is
 
-If I will see any malicious activity with the patterns of my code used in bootstrapfs, APFSRW, Makerw, Dopamine_Rootful and Fugu15_Rootful (one love) I will immediately report it on github or on the platform where I saw it. This project **DOES NOT** contain malware. The ownere of the device can do whatever he wants with it, however - the apple guarantee can be vanished after jailbreaking. But what I would say about it - devices on ios 15 are already out-of-guarantee in most cases due to their age, but I would not recommend installing this on main or production device unless you need to fully protect your device from coruna exploit chain.
+Three layers, each building on the one below:
 
+1. **Dopamine** — opa334's semi-untethered jailbreak for iOS 15.
+2. **ghh-jb's rootful port** — replaces the rootless-only layout with real
+   writable APFS volumes over `/usr`, `/Library`, `/Applications`,
+   `/private/etc`, `/sbin` and `/bin`, via `bootstrapfs`.
+3. **This fork** — fixes the bugs that stopped tweaks loading at all, and adds
+   the machinery to install legacy rootful tweaks alongside rootless ones.
 
+Despite the name, this is **not** a pre-rootless jailbreak. It uses a Procursus
+rootless bootstrap in a preboot jbroot with a `/var/jb` symlink, *and* real
+writable system volumes. That hybrid is why it can host both kinds of tweak —
+and why the code does not look like either kind of jailbreak you may be used to.
 
-**LEGAL NOTICE**
-1. Purpose: Studying iOS architecture, kernel
-protection mechanisms, and implementing
-"rootful" access concepts for legitimate
-device owners.<br>
-2. Non-Malicious Use: This software is NOT
-designed to gain unauthorized access to
-third-party data, bypass digital rights
-management (DRM), or perform any illegal
-activities. <br>
-3. No Warranty: The software is provided
-**"as is"**, without warranty of any kind. The author
-shall not be liable for any claims, damages,
-or other liability arising from the use of this
-source code.
-4. Compliance: Users are responsible for
-complying with their local laws. This project
-is a Proof of Concept (PoC) and requires
-manual compilation by the user.
+**Read [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) before changing anything.**
+Several sharp edges (notably `/usr/lib`) behave the opposite of how they look.
 
+## What is different from upstream Dopamine
 
+| | Upstream | This fork |
+|---|---|---|
+| System paths | read-only | real writable APFS volumes |
+| Tweak architectures | `iphoneos-arm64` | `iphoneos-arm64` **and** `iphoneos-arm` |
+| Package managers | Sileo, Zebra | patched Sileo only, installed automatically |
+| Legacy tweak signatures | not handled | re-signed to SHA-256 on install |
+| Update checks | opa334/Dopamine | this repo |
 
+## Status
 
+Verified end to end on **iPhone 6s (iPhone8,1), iOS 15.0.2**: a 2020-era
+rootful tweak installed through the Sileo GUI with no forcing, and injected
+into SpringBoard alongside a rootless tweak.
 
-Official website / download: https://ellekit.space/dopamine/
+ghh-jb reports the rootful base working on iPhone SE 2020 (15.2) and
+iPhone SE 2016 (15.8.6). **iOS 16 is not supported** — it panics on userspace
+reboot due to Launch Constraints on core daemons.
 
-############# <br>
-====BUILD==== <br>
-############# <br>
+On A12 and later, legacy tweaks can only inject into arm64 App Store apps, not
+arm64e system processes. See [docs/LEGACY-TWEAKS.md](docs/LEGACY-TWEAKS.md).
 
-- [!] THEOS MUST BE INSTALLED!!!
+## Documentation
 
-- [#] In terminal: "cd /path/to/Dopamine"
-- [#] In terminal: "git submodule init"
-- [#] In terminal: "git submodule update" and wait for process to finish
-- [## ########]
-- [#] MAKE SURE TO HAVE Xcode 14-15! This is VERY important!
-- [## ########]
-- [#] In terminal: "cd ./BaseBin"
-- [#] In terminal: "make" and wait for process to finish
-- [#] In terminal: "cd ../Application/Dopamine/Resouces"
-- [#] In terminal: "./download_bootstraps.sh" and wait for process to finish
-- [#] In terminal: "cd ../../../"
-- [#] In terminal: "cd ./Packages"
-- [#] In terminal: "make" and wait for process to finish
-- [#] In Xcode 15: /connect your device/
-- [#] In Xcode 15: /Build and run project on YOUR device/
-- [#] On your iph: Enjoy jailbreak process
+| Document | Contents |
+|---|---|
+| [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | jbroot, bootstrapfs volumes, the `/usr/lib` trap, injection, trustcache |
+| [docs/LEGACY-TWEAKS.md](docs/LEGACY-TWEAKS.md) | how both architectures install; diagnosing a tweak that will not load |
+| [docs/BUILDING.md](docs/BUILDING.md) | toolchain, SDKs, build order, known build failures, CI |
+| [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md) | runtime failure modes and how to recognise them |
 
-- {##} Tested with Xcode 15.0.1; MacBook CPU Intel Core i5; MacOS Sonoma 14.0
-- {##} IF YOU NEED MULTIPLE XCODE INSTALLATIONS USE THIS: https://xcodes.org
+## Building
+
+Full detail in [docs/BUILDING.md](docs/BUILDING.md). Short version:
+
+```bash
+# Xcode 14 or 15 (NOT 16+), Theos, and: ldid dpkg trustcache xz coreutils
+#                                       findutils libarchive openssl@3
+./Application/Dopamine/Resources/download_bootstraps.sh   # ~40 MB, not in git
+gmake -j$(sysctl -n hw.logicalcpu) NIGHTLY=1
+# -> Application/Dopamine.tipa
+```
+
+> **Do not run `git submodule init/update`.** ChOma, XPF, opainject, litehook
+> and kfd are vendored as ordinary files; `.gitmodules` is stale and its kfd
+> path is wrong. The older instructions in this README were misleading and have
+> been removed.
+
+The patched Sileo in [`Sileo/`](Sileo) is vendored the same way and builds
+independently:
+
+```bash
+cd Sileo && make package SILEO_PLATFORM=iphoneos-arm64
+```
+
+Install `Application/Dopamine.tipa` with TrollStore. BaseBin changes need one
+re-jailbreak to take effect, because the trustcache has to be regenerated.
+
+## Credits
+
+- **[opa334](https://github.com/opa334)** — Dopamine, TrollStore, ChOma, XPF
+- **[ghh-jb](https://github.com/ghh-jb)** — the rootful port this builds on:
+  [bootstrapfs](https://github.com/ghh-jb/bootstrapfs),
+  [APFSRW](https://github.com/ghh-jb/APFSRW),
+  [Makerw](https://github.com/ghh-jb/Makerw),
+  [Fugu15_Rootful](https://github.com/ghh-jb/Fugu15_Rootful)
+- **[Sileo Team](https://github.com/Sileo/Sileo)** — Sileo
+- **[RootHide](https://github.com/roothide)** — Derootifier, whose approach to
+  rootful conversion informed the design here
+- **[Procursus Team](https://github.com/ProcursusTeam)** — the bootstrap
+- **ElleKit**, **Fugu15**, **kfd**, **libgrabkernel2**, **plooshinit** — see the
+  licence files in `Application/Dopamine/Resources/`
+
+Original Dopamine site / downloads: https://ellekit.space/dopamine/
+
+## Warnings
+
+- Experimental, and intended for **developers and security researchers**. It is
+  not a one-click jailbreak.
+- Do not install on a primary or production device.
+- Issues about **version support will be closed without response**.
+- Issues about this rootful fork must **not** be filed against opa334/Dopamine
+  unless they reproduce on unmodified Dopamine.
+- Bootstrapping this version can be harder than the original jailbreak.
+- No warranty. **Use at your own risk.**
+
+## Legal notice
+
+Retained from ghh-jb's original README:
+
+1. **Purpose:** Studying iOS architecture, kernel protection mechanisms, and
+   implementing "rootful" access concepts for legitimate device owners.
+2. **Non-malicious use:** This software is NOT designed to gain unauthorized
+   access to third-party data, bypass digital rights management (DRM), or
+   perform any illegal activities.
+3. **No warranty:** The software is provided **"as is"**, without warranty of
+   any kind. The author shall not be liable for any claims, damages, or other
+   liability arising from the use of this source code.
+4. **Compliance:** Users are responsible for complying with their local laws.
+   This project is a Proof of Concept and requires manual compilation.
+
+This project **does not** contain malware, and must never be used for malicious
+purposes such as bypassing iCloud Lock, MDM, or similar protections. ghh-jb has
+stated that malicious use of patterns from `bootstrapfs`, `APFSRW`, `Makerw`,
+`Dopamine_Rootful` or `Fugu15_Rootful` will be reported.
+
+## Licence
+
+See [LICENSE.md](LICENSE.md), and the per-component licences in
+`Application/Dopamine/Resources/`. The vendored Sileo tree keeps its own
+licence at [`Sileo/LICENSE`](Sileo/LICENSE).

@@ -14,9 +14,33 @@ Everything below was validated end‑to‑end on:
 | Homebrew  | arm64 (`/opt/homebrew`) |
 
 Result: a clean `gmake NIGHTLY=1` at the repo root finishes in **~45 s** and
-produces `Application/Dopamine.tipa` (≈53 MB), main executable carrying its 14
+produces `Application/Dopamine.tipa` (≈50 MB), main executable carrying its 14
 entitlements, nested exploit frameworks ad‑hoc signed, `_CodeSignature/CodeResources`
 sealed. Ready to sideload / install via TrollStore.
+
+## Building the bundled Sileo
+
+`Application/Dopamine/Resources/sileo.deb` is a build of the vendored tree in
+[`../Sileo`](../Sileo), not an upstream release. It only needs rebuilding when
+that tree changes:
+
+```bash
+cd Sileo
+make package SILEO_PLATFORM=iphoneos-arm64
+cp packages/org.coolstar.sileo_*_iphoneos-arm64.deb \
+   ../Application/Dopamine/Resources/sileo.deb
+```
+
+It builds with `xcodebuild` rather than Theos, so it needs no SDK setup — but it
+does need the shared scheme and `Package.resolved`, both of which are committed
+(`.gitignore` carries explicit exceptions for them; without those the build
+fails on a fresh clone).
+
+Three upstream-Sileo fixes are already applied in the vendored tree and will be
+needed again if you re-vendor from upstream: deployment target 11.0 → 12.0
+(Evander requires 12.0), a `memrchr` implementation (Xcode 15's clang rewrites
+`strrchr` over a constant string into a `memrchr` call that Darwin lacks), and
+`readData(ofLength:)` in place of `read(upToCount:)`.
 
 ---
 
