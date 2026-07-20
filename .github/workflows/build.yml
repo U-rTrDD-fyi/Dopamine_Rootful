@@ -3,7 +3,7 @@ name: Build Dopamine (.tipa for TrollStore)
 on:
   workflow_dispatch:
   push:
-    branches: [rootful-aio, main]
+    branches: [rootful-aio]
     paths-ignore:
       - '**.md'
       - '.gitignore'
