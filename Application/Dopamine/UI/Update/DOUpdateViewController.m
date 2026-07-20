@@ -119,7 +119,7 @@
                     return;
                 }
             }
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://github.com/opa334/Dopamine/releases"] options:@{} completionHandler:nil];
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://github.com/U-rTrDD-fyi/Dopamine_Rootful/releases"] options:@{} completionHandler:nil];
             return;
         }
 

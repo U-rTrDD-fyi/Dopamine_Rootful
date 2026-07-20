@@ -68,7 +68,10 @@
     static dispatch_once_t onceToken;
     static NSArray *releases;
     dispatch_once(&onceToken, ^{
-        NSURL *url = [NSURL URLWithString:@"https://api.github.com/repos/opa334/Dopamine/releases"];
+        // This fork's own releases. Pointing at opa334/Dopamine offers upstream
+        // rootless builds as "updates", which would replace the rootful
+        // jailbreak with an incompatible one.
+        NSURL *url = [NSURL URLWithString:@"https://api.github.com/repos/U-rTrDD-fyi/Dopamine_Rootful/releases"];
         NSData *data = [NSData dataWithContentsOfURL:url];
         if (data) {
             NSError *error;
