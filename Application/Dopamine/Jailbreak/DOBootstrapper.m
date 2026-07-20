@@ -21,11 +21,13 @@
 #define LIBKRW_DOPAMINE_BUNDLED_VERSION @"2.0.3"
 #define LIBROOT_DOPAMINE_BUNDLED_VERSION @"1.0.1"
 #define BASEBIN_LINK_BUNDLED_VERSION @"1.0.0"
+#define ELLEKIT_BUNDLED_VERSION @"1.1.3"
 
 static NSDictionary *gBundledPackages = @{
     @"libkrw0-dopamine" : LIBKRW_DOPAMINE_BUNDLED_VERSION,
     @"libroot-dopamine" : LIBROOT_DOPAMINE_BUNDLED_VERSION,
     @"dopamine-basebin-link" : BASEBIN_LINK_BUNDLED_VERSION,
+    @"ellekit" : ELLEKIT_BUNDLED_VERSION,
 };
 
 struct hfs_mount_args {
@@ -714,6 +716,16 @@ typedef NS_ENUM(NSInteger, JBErrorCode) {
             @" they resolve against this jailbreak's arm64 packages.",
             firmwareVersion, systemInfo.machine]];
         patchedCount++;
+
+        // dpkg warns "files list file for package ... missing" on every
+        // transaction unless each installed package has an info/<pkg>.list file.
+        // The shim owns no files, so an empty list is correct. The filename is
+        // NOT arch-qualified: dpkg only appends ":arch" when a package is
+        // installed in more than one architecture, which this never is.
+        NSString *listPath = JBROOT_PATH(@"/var/lib/dpkg/info/dopamine-legacy-compat.list");
+        if (![[NSFileManager defaultManager] fileExistsAtPath:listPath]) {
+            [[NSData data] writeToFile:listPath atomically:YES];
+        }
     }
 
     if (patchedCount == 0) return;
@@ -860,6 +872,21 @@ typedef NS_ENUM(NSInteger, JBErrorCode) {
             int r = [self installPackage:basebinLinkPath];
             if (r != 0) return [NSError errorWithDomain:bootstrapErrorDomain code:BootstrapErrorCodeFailedFinalising userInfo:@{NSLocalizedDescriptionKey : [NSString stringWithFormat:@"Failed to install basebin link: %d\n", r]}];
         }
+    }
+
+    // ellekit is the tweak loader (it ships TweakLoader, CydiaSubstrate.framework
+    // and provides mobilesubstrate). Nothing loads tweaks without it, and it
+    // normally only arrives as a dependency of the first tweak the user installs.
+    // Bundle it so it is present now - crucially before setupLegacyTweakSupport,
+    // which needs it installed to mark it Multi-Arch: foreign and to bridge the
+    // rootful paths it provides. Without that, a fresh device cannot resolve any
+    // legacy tweak's mobilesubstrate dependency (ellekit's repo metadata is not
+    // Multi-Arch: foreign, so only the installed-and-marked copy satisfies it).
+    if ([self shouldInstallPackage:@"ellekit"]) {
+        [[DOUIManager sharedInstance] sendLog:@"Installing ElleKit" debug:NO];
+        NSString *ellekitPath = [[NSBundle mainBundle].bundlePath stringByAppendingPathComponent:@"ellekit.deb"];
+        int r = [self installPackage:ellekitPath];
+        if (r != 0) return [NSError errorWithDomain:bootstrapErrorDomain code:BootstrapErrorCodeFailedFinalising userInfo:@{NSLocalizedDescriptionKey : [NSString stringWithFormat:@"Failed to install ElleKit: %d\n", r]}];
     }
 
     [self setupLegacyTweakSupport];
