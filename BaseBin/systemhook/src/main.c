@@ -502,14 +502,26 @@ __attribute__((constructor)) static void initializer(void)
 		}
 #endif
 		// Load tweaks if desired
-		// We can hardcode / here since if it doesn't exist, loading TweakLoader.dylib is not going to work anyways
+		// The loader lives inside the jbroot (ellekit ships it at <jbroot>/usr/lib).
+		// Do NOT hardcode "/usr/lib" here: bootstrapfs mounts a writable /usr volume
+		// seeded from basebin/.fakelib, which contains only the dyld/libSystem stubs,
+		// so /usr/lib/TweakLoader.dylib does not exist and every tweak - rootless and
+		// rootful alike - silently fails to load.
+		// A rootful loader at /usr/lib is still honoured if something installs one.
 		if (should_enable_tweaks()) {
-			const char *tweakLoaderPath = "/usr/lib/TweakLoader.dylib";
-			
-			if (access(tweakLoaderPath, F_OK) == 0) {
-				void *tweakLoaderHandle = dlopen(tweakLoaderPath, RTLD_NOW);
-				if (tweakLoaderHandle != NULL) {
-					dlclose(tweakLoaderHandle);
+			const char *tweakLoaderPaths[] = {
+				JBROOT_PATH("/usr/lib/TweakLoader.dylib"),
+				"/usr/lib/TweakLoader.dylib",
+			};
+
+			for (size_t i = 0; i < sizeof(tweakLoaderPaths) / sizeof(*tweakLoaderPaths); i++) {
+				const char *tweakLoaderPath = tweakLoaderPaths[i];
+				if (access(tweakLoaderPath, F_OK) == 0) {
+					void *tweakLoaderHandle = dlopen(tweakLoaderPath, RTLD_NOW);
+					if (tweakLoaderHandle != NULL) {
+						dlclose(tweakLoaderHandle);
+					}
+					break;
 				}
 			}
 		}
