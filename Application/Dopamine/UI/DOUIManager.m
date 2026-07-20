@@ -138,9 +138,19 @@
 
 - (NSArray*)enabledPackageManagerKeys
 {
-    NSArray *enabledPkgManagers = [_preferenceManager preferenceValueForKey:@"enabledPkgManagers"] ?: @[];
-    NSMutableArray *enabledKeys = [NSMutableArray new];
     NSArray *availablePkgManagers = [self availablePackageManagers];
+
+    // Only the patched Sileo is bundled now, so there is nothing to choose
+    // between. With no stored preference, enable everything available: this
+    // installs Sileo on the first jailbreak and suppresses the picker, which
+    // only appears when nothing is enabled. An explicitly empty preference is
+    // still honoured, so deselecting from Settings keeps working.
+    NSArray *enabledPkgManagers = [_preferenceManager preferenceValueForKey:@"enabledPkgManagers"];
+    if (!enabledPkgManagers) {
+        return [availablePkgManagers valueForKey:@"Key"];
+    }
+
+    NSMutableArray *enabledKeys = [NSMutableArray new];
 
     [availablePkgManagers enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         NSString *key = obj[@"Key"];
